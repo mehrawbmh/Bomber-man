@@ -1,4 +1,4 @@
-#include "player.h"
+#include "headers/player.hpp"
 
 Player::Player(float x, float y)
 {
@@ -10,8 +10,7 @@ Player::Player(float x, float y)
 void Player::initVariables()
 {
 	this->movementSpeed = 15.f;
-	this->MaxHp = 3;
-	this->hp = MaxHp;
+	this->hp = MAX_HP;
 }
 void Player::initShape()
 {
@@ -32,7 +31,7 @@ void Player::updatePosition()
 	{
 		this->shape.move(0.f, -this->movementSpeed);
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) //TODO: add arrow keys?
 	{
 		this->shape.move(0.f, this->movementSpeed);
 	}
