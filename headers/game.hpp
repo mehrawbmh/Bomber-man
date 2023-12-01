@@ -24,6 +24,8 @@ private:
 
     void updateTimer();
 
+    std::vector<std::vector<MapObject>> readMap();
+
 public:
     Game();
 
@@ -40,7 +42,6 @@ public:
     bool isFinished();
 
     static int getRandomNumber(int startRange, int endRange);
-
 };
 
 

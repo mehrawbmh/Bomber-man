@@ -26,11 +26,8 @@ void Game::start() {
     this->window->clear(sf::Color::White);
     this->initTimer();
 
-    MapObject obj = Grass;
-    std::vector<std::vector<MapObject>> vec = {{obj, obj}, {obj, obj}};
-
     std::cout << "Loading map...\n";
-    this->map->init(vec);
+    this->map->init(this->readMap());
     std::cout << "Loading of map finished\n";
 
     this->window->display();
@@ -93,4 +90,17 @@ void Game::update() {
 void Game::updateTimer() {
     this->timer.setString("Timer: " + std::to_string(this->clock.getElapsedTime().asSeconds()));
     this->window->draw(this->timer);
+}
+
+std::vector<std::vector<MapObject>> Game::readMap() {
+    MapObject grass = Grass;
+    MapObject wall1 = Wall1;
+    MapObject wall2 = Wall2;
+    std::vector<std::vector<MapObject>> vec = {
+            {grass, grass, wall1},
+            {grass, wall2, wall2, wall1, grass},
+            {wall1, grass, grass},
+    };
+
+    return vec;
 }

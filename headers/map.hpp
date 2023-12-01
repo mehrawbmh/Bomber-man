@@ -31,8 +31,11 @@ private:
     sf::RenderWindow* window;
     sf::Event event;
     sf::Texture grass;
+    sf::Texture wall1;
+    sf::Texture wall2;
     sf::Sprite createElement(MapObject element, int x, int y);
     sf::Texture createGrass();
+    sf::Texture createWall(int type);
 
     void draw();
 

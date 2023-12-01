@@ -5,6 +5,8 @@ Map::Map(sf::RenderWindow *renderWindow, sf::Event _event) {
     this->event = _event;
 
     this->grass = this->createGrass();
+    this->wall1 = this->createWall(1);
+    this->wall2 = this->createWall(2);
 }
 
 Map::~Map() {
@@ -23,14 +25,38 @@ Map::~Map() {
     return grassTexture;
 }
 
+sf::Texture Map::createWall(int type) {
+    sf::Texture wallTexture;
+    std::string file = (type == 1) ? WALL1_FILE : WALL2_FILE;
+    if (wallTexture.loadFromFile(BASE_SPRITES_DIR + "/" + file)) {
+        wallTexture.setSmooth(true);
+        std::cout << "Grass:" << wallTexture.getSize().x << wallTexture.getSize().y << std::endl;
+        std::cout << "grass loaded\n";
+    }
+
+    return wallTexture;
+}
+
 sf::Sprite Map::createElement(MapObject element, int xPos, int yPos) {
     sf::Sprite sprite;
     switch (element) {
         case Grass:
         {
             sprite.setTexture(this->grass);
-            std::cout << "sprite created... at " << sprite.getPosition().x << ":" << sprite.getPosition().y << "\n";
+            std::cout << "sprite grass created... at " << sprite.getPosition().x << ":" << sprite.getPosition().y << "\n";
             std::cout << sprite.getScale().x << sprite.getScale().y << std::endl;
+            break;
+        }
+        case Wall1:
+        {
+            sprite.setTexture(this->wall1);
+            std::cout << "sprite wall1 created... at " << sprite.getPosition().x << ":" << sprite.getPosition().y << "\n";
+            break;
+        }
+        case Wall2:
+        {
+            sprite.setTexture(this->wall2);
+            std::cout << "sprite wall2 created... at " << sprite.getPosition().x << ":" << sprite.getPosition().y << "\n";
             break;
         }
         default:
