@@ -1,5 +1,5 @@
-#ifndef __MAP__
-#define __MAP__ "MAP.hpp"
+#ifndef MAP
+#define MAP "MAP.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <vector>
