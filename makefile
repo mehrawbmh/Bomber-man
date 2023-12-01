@@ -23,8 +23,11 @@ game.o: headers/game.hpp headers/map.hpp ./game.cpp
 map.o: headers/map.hpp ./map.cpp
 	$(CC) -c map.cpp $(SFML_FLAGS);
 
-$(TARGET): $(BINDIR) main.o game.o map.o
-	$(CC) main.o game.o map.o -o $(TARGET) $(SFML_FLAGS);
+player.o: headers/player.hpp ./player.cpp
+	$(CC) -c player.cpp $(SFML_FLAGS);
+
+$(TARGET): $(BINDIR) main.o game.o map.o player.o
+	$(CC) main.o game.o map.o player.o -o $(TARGET) $(SFML_FLAGS);
 
 clean:
 	rm -f *.o;
