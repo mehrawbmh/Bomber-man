@@ -23,7 +23,7 @@ Map::~Map() {
     return grassTexture;
 }
 
-void Map::createElement(MapObject element, int xPos, int yPos) {
+sf::Sprite Map::createElement(MapObject element, int xPos, int yPos) {
     sf::Sprite sprite;
     switch (element) {
         case Grass:
@@ -38,7 +38,8 @@ void Map::createElement(MapObject element, int xPos, int yPos) {
     }
 
     sprite.setPosition(static_cast<float>(xPos), static_cast<float>(yPos));
-    this->window->draw(sprite);
+
+    return sprite;
 }
 
 void Map::init(std::vector<std::vector<MapObject>> mapObjects) {
@@ -46,9 +47,19 @@ void Map::init(std::vector<std::vector<MapObject>> mapObjects) {
     for (const auto &elements: mapObjects) {
         x = 0;
         for (const auto &element: elements) {
-            this->createElement(element, x, y);
+            this->sprites.push_back(this->createElement(element, x, y));
             x += ELEMENT_SIZE_X;
         }
         y += ELEMENT_SIZE_Y;
+    }
+}
+
+void Map::update() {
+    this->draw();
+}
+
+void Map::draw() {
+    for (const auto &sprite: this->sprites) {
+        this->window->draw(sprite);
     }
 }

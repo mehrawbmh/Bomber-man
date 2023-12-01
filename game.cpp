@@ -4,6 +4,8 @@
 
 Game::Game() {
     this->window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), GAME_TITLE);
+    this->font.loadFromFile("fonts/arial.ttf");
+    this->map = new Map(this->window, this->event);
 }
 
 Game::~Game() {
@@ -22,13 +24,13 @@ int Game::getRandomNumber(int startRange, int endRange) {
 void Game::start() {
     this->window->setFramerateLimit(100); //TODO: change it?
     this->window->clear(sf::Color::White);
+    this->initTimer();
 
     MapObject obj = Grass;
     std::vector<std::vector<MapObject>> vec = {{obj, obj}, {obj, obj}};
 
     std::cout << "Loading map...\n";
-    Map map(this->window, this->event);
-    map.init(vec);
+    this->map->init(vec);
     std::cout << "Loading of map finished\n";
 
     this->window->display();
@@ -37,7 +39,19 @@ void Game::start() {
 
 void Game::run() {
     this->handleEvents();
+    this->update();
     this->window->display();
+}
+
+void Game::initTimer() {
+    std::cout << "Loading timer...\n";
+    this->clock.restart();
+    this->timer.setFillColor(sf::Color::Black);
+    this->timer.setCharacterSize(24);
+    this->timer.setOutlineColor(sf::Color::Red);
+    this->timer.setPosition(static_cast<float>(this->window->getSize().x - 150), 0.f);
+    this->timer.setFont(this->font);
+    std::cout << "Finished loading timer";
 }
 
 void Game::handleEvents() {
@@ -67,4 +81,18 @@ bool Game::isClosed() {
 
 bool Game::isFinished() {
     return this->finished;
+}
+
+void Game::update() {
+    this->map->update();
+    this->updateTimer();
+}
+
+void Game::updateTimer() {
+    sf::Time elapsedTime = this->clock.getElapsedTime();
+    int seconds = static_cast<int>(elapsedTime.asSeconds());
+
+    this->timer.setString("Timer: " + std::to_string(seconds));
+    this->window->clear(sf::Color::White);
+    this->window->draw(this->timer);
 }

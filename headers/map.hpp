@@ -23,22 +23,26 @@ private:
     const std::string KEY2_FILE = "key2.png";
     const std::string KEY3_FILE = "key3.jpg";
 
+    std::vector<sf::Sprite> sprites;
+
     int rows = 10;
     int columns = 10;
 
     sf::RenderWindow* window;
     sf::Event event;
-
     sf::Texture grass;
-
-    void createElement(MapObject element, int x, int y);
+    sf::Sprite createElement(MapObject element, int x, int y);
     sf::Texture createGrass();
+
+    void draw();
 
 public:
     Map(sf::RenderWindow*, sf::Event);
     ~Map();
 
     void init(std::vector<std::vector<MapObject>>);
+
+    void update();
 };
 
 #endif

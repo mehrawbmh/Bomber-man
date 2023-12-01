@@ -8,11 +8,21 @@ const std::string GAME_TITLE = "Bomber-man";
 
 class Game {
 private:
-    sf::RenderWindow *window;
-    sf::Event event{};
     bool finished = false;
 
+    sf::RenderWindow *window;
+    sf::Event event{};
+    sf::Clock clock{};
+    sf::Text timer{};
+    sf::Font font{};
+
+    Map* map;
+
     void handleEvents();
+
+    void update();
+
+    void updateTimer();
 
 public:
     Game();
@@ -25,9 +35,12 @@ public:
 
     void run();
 
+    void initTimer();
+
     bool isFinished();
 
     static int getRandomNumber(int startRange, int endRange);
+
 };
 
 
