@@ -49,7 +49,7 @@ void Game::initTimer() {
     this->timer.setOutlineColor(sf::Color::Red);
     this->timer.setPosition(static_cast<float>(this->window->getSize().x - 150), 0.f);
     this->timer.setFont(this->font);
-    std::cout << "Loading of timer finished";
+    std::cout << "Loading of timer finished\n";
 }
 
 void Game::handleEvents() {

@@ -39,7 +39,6 @@ sf::Sprite Map::createElement(MapObject element, int xPos, int yPos) {
     switch (element) {
         case Grass: {
             sprite.setTexture(this->grass);
-            std::cout << sprite.getScale().x << sprite.getScale().y << std::endl;
             break;
         }
         case Wall1: {
