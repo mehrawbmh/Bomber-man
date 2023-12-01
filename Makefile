@@ -1,4 +1,4 @@
-PROJECT_NAME := Bomber-man
+PROJECT_NAME := bomberman.out
 CC := g++ --std=c++20
 
 HEADERS_DIR := headers
