@@ -5,6 +5,7 @@
 #include "map.hpp"
 
 const std::string GAME_TITLE = "Bomber-man";
+const std::string MAP_INIT_FILE = "map.txt";
 
 class Game {
 private:
@@ -16,7 +17,7 @@ private:
     sf::Text timer{};
     sf::Font font{};
 
-    Map* map;
+    Map *map;
 
     void handleEvents();
 

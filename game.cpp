@@ -9,6 +9,7 @@ Game::Game() {
 }
 
 Game::~Game() {
+    delete this->map;
     delete this->window;
 }
 
@@ -48,7 +49,7 @@ void Game::initTimer() {
     this->timer.setOutlineColor(sf::Color::Red);
     this->timer.setPosition(static_cast<float>(this->window->getSize().x - 150), 0.f);
     this->timer.setFont(this->font);
-    std::cout << "Finished loading timer";
+    std::cout << "Loading of timer finished";
 }
 
 void Game::handleEvents() {

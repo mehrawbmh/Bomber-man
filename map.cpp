@@ -10,15 +10,13 @@ Map::Map(sf::RenderWindow *renderWindow, sf::Event _event) {
 }
 
 Map::~Map() {
-    //todo: delete sprites.
-    return;
+
 }
 
- sf::Texture Map::createGrass() {
+sf::Texture Map::createGrass() {
     sf::Texture grassTexture;
     if (grassTexture.loadFromFile(BASE_SPRITES_DIR + "/" + GRASS_FILE)) {
         grassTexture.setSmooth(true); //TODO?
-        std::cout << "Grass:" << grassTexture.getSize().x << grassTexture.getSize().y << std::endl;
         std::cout << "grass loaded\n";
     }
 
@@ -30,7 +28,6 @@ sf::Texture Map::createWall(int type) {
     std::string file = (type == 1) ? WALL1_FILE : WALL2_FILE;
     if (wallTexture.loadFromFile(BASE_SPRITES_DIR + "/" + file)) {
         wallTexture.setSmooth(true);
-        std::cout << "Grass:" << wallTexture.getSize().x << wallTexture.getSize().y << std::endl;
         std::cout << "grass loaded\n";
     }
 
@@ -40,31 +37,24 @@ sf::Texture Map::createWall(int type) {
 sf::Sprite Map::createElement(MapObject element, int xPos, int yPos) {
     sf::Sprite sprite;
     switch (element) {
-        case Grass:
-        {
+        case Grass: {
             sprite.setTexture(this->grass);
-            std::cout << "sprite grass created... at " << sprite.getPosition().x << ":" << sprite.getPosition().y << "\n";
             std::cout << sprite.getScale().x << sprite.getScale().y << std::endl;
             break;
         }
-        case Wall1:
-        {
+        case Wall1: {
             sprite.setTexture(this->wall1);
-            std::cout << "sprite wall1 created... at " << sprite.getPosition().x << ":" << sprite.getPosition().y << "\n";
             break;
         }
-        case Wall2:
-        {
+        case Wall2: {
             sprite.setTexture(this->wall2);
-            std::cout << "sprite wall2 created... at " << sprite.getPosition().x << ":" << sprite.getPosition().y << "\n";
             break;
         }
         default:
-            std::cout << "NOT handling others yet!\n";
+            std::cout << "NOT handling other map objets yet!\n";
     }
 
     sprite.setPosition(static_cast<float>(xPos), static_cast<float>(yPos));
-
     return sprite;
 }
 

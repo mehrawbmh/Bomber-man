@@ -6,7 +6,9 @@
 #include <string>
 #include <iostream>
 
-enum MapObject {Wall1, Wall2, Door, Grass, EnemyH, EnemyV};
+enum MapObject {
+    Wall1, Wall2, Door, Grass, EnemyH, EnemyV
+};
 
 const int ELEMENT_SIZE_Y = 100;
 const int ELEMENT_SIZE_X = 100;
@@ -28,19 +30,22 @@ private:
     int rows = 10;
     int columns = 10;
 
-    sf::RenderWindow* window;
+    sf::RenderWindow *window;
     sf::Event event;
     sf::Texture grass;
     sf::Texture wall1;
     sf::Texture wall2;
+
     sf::Sprite createElement(MapObject element, int x, int y);
+
     sf::Texture createGrass();
+
     sf::Texture createWall(int type);
 
     void draw();
 
 public:
-    Map(sf::RenderWindow*, sf::Event);
+    Map(sf::RenderWindow *, sf::Event);
 
     ~Map();
 
