@@ -45,11 +45,11 @@ private:
     void draw();
 
 public:
-    Map(sf::RenderWindow *, sf::Event);
+    Map(sf::RenderWindow *_window, sf::Event _event);
 
     ~Map();
 
-    void init(std::vector<std::vector<MapObject>>);
+    void init(const std::vector<std::vector<MapObject>> &objects);
 
     void update();
 };

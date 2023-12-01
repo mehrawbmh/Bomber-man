@@ -17,7 +17,6 @@ sf::Texture Map::createGrass() {
     sf::Texture grassTexture;
     if (grassTexture.loadFromFile(BASE_SPRITES_DIR + "/" + GRASS_FILE)) {
         grassTexture.setSmooth(true); //TODO?
-        std::cout << "grass loaded\n";
     }
 
     return grassTexture;
@@ -28,7 +27,6 @@ sf::Texture Map::createWall(int type) {
     std::string file = (type == 1) ? WALL1_FILE : WALL2_FILE;
     if (wallTexture.loadFromFile(BASE_SPRITES_DIR + "/" + file)) {
         wallTexture.setSmooth(true);
-        std::cout << "grass loaded\n";
     }
 
     return wallTexture;
@@ -57,7 +55,7 @@ sf::Sprite Map::createElement(MapObject element, int xPos, int yPos) {
     return sprite;
 }
 
-void Map::init(std::vector<std::vector<MapObject>> mapObjects) {
+void Map::init(const std::vector<std::vector<MapObject>>& mapObjects) {
     int x = 0, y = 0;
     for (const auto &elements: mapObjects) {
         x = 0;
