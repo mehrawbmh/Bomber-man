@@ -84,16 +84,13 @@ bool Game::isFinished() {
 }
 
 void Game::update() {
+    this->window->clear(sf::Color::White);
     this->updateTimer();
     this->map->update();
 
 }
 
 void Game::updateTimer() {
-    sf::Time elapsedTime = this->clock.getElapsedTime();
-    int seconds = static_cast<int>(elapsedTime.asSeconds());
-
-    this->timer.setString("Timer: " + std::to_string(seconds));
-    this->window->clear(sf::Color::White);
+    this->timer.setString("Timer: " + std::to_string(this->clock.getElapsedTime().asSeconds()));
     this->window->draw(this->timer);
 }
