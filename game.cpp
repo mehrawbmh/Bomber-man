@@ -84,8 +84,9 @@ bool Game::isFinished() {
 }
 
 void Game::update() {
-    this->map->update();
     this->updateTimer();
+    this->map->update();
+
 }
 
 void Game::updateTimer() {

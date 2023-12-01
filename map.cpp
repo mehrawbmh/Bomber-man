@@ -59,7 +59,7 @@ void Map::update() {
 }
 
 void Map::draw() {
-    for (const auto &sprite: this->sprites) {
+    for (const sf::Sprite &sprite: this->sprites) {
         this->window->draw(sprite);
     }
 }

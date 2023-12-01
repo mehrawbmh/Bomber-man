@@ -38,6 +38,7 @@ private:
 
 public:
     Map(sf::RenderWindow*, sf::Event);
+
     ~Map();
 
     void init(std::vector<std::vector<MapObject>>);
