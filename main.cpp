@@ -1,10 +1,12 @@
-#include <iostream>
-#include <string>
-#include <vector>
+#include "headers/game.hpp"
 
-using namespace std;
+int main() {
+    Game game;
 
-int main(int argc, char *argv[]) {
-    cout << "OK now" << endl;
+    game.start();
+    do {
+        game.run();
+    } while (!game.isClosed());
+
     return 0;
 }
