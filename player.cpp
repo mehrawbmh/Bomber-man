@@ -10,7 +10,7 @@ Player::Player(float x, float y)
 void Player::initVariables()
 {
 	this->movementSpeed = 15.f;
-	this->hp = MAX_HP;
+	this->hp = 2;
 }
 void Player::initShape()
 {
