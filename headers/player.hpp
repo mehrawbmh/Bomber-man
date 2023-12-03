@@ -9,12 +9,15 @@
 
 class Player {
 private:
-    sf::RectangleShape shape;
+    sf::Sprite sprite;
+    sf::Texture upwards_texture;
+    sf::Texture downwards_texture;
+    sf::Texture right_texture;
+    sf::Texture left_texture;
 
     float movementSpeed;
     int hp = 2;
-
-    void initShape();
+    void initTexture();
 
 public:
     static const int MAX_HP = 3;

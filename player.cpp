@@ -2,50 +2,69 @@
 
 Player::Player(float x, float y)
 {
-	this->shape.setPosition(x, y);
-    this->initShape();
-    this->movementSpeed = 10.f;
+	this->sprite.setPosition(x, y);
+    this->initTexture();
+	this->sprite.setTexture(this->upwards_texture);
+    this->movementSpeed = 3.f;
 }
 
-void Player::initShape()
+void Player::initTexture()
 {
-	this->shape.setFillColor(sf::Color::Blue);
-	this->shape.setSize(sf::Vector2f(100.f, 100.f));
+	if(!this->upwards_texture.loadFromFile("sprites/boy/up.png")){
+		std::cout << "Failed to load up texture\n";
+	}
+	if(!this->downwards_texture.loadFromFile("sprites/boy/down-stay.png")){
+		std::cout << "Failed to load down texture\n";
+	}
+	if(!this->right_texture.loadFromFile("sprites/boy/right.png")){
+		std::cout << "Failed to load right texture\n";
+	}
+	if(!this->left_texture.loadFromFile("sprites/boy/left.png")){
+		std::cout << "Failed to load left texture\n";
+	}
 }
 
 void Player::updatePosition()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		this->shape.move(-this->movementSpeed, 0.f);
+		this->sprite.move(-this->movementSpeed, 0.f);
+		this->sprite.setTexture(this->left_texture);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		this->shape.move(this->movementSpeed, 0.f);
+		this->sprite.move(this->movementSpeed, 0.f);
+		this->sprite.setTexture(this->right_texture);
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		this->shape.move(0.f, -this->movementSpeed);
+		this->sprite.move(0.f, -this->movementSpeed);
+		this->sprite.setTexture(this->upwards_texture);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		this->shape.move(0.f, this->movementSpeed);
+		this->sprite.move(0.f, this->movementSpeed);
+		this->sprite.setTexture(this->downwards_texture);
+	}
+	else
+	{
+		this->sprite.setTexture(this->downwards_texture);
 	}
 }
 
 void Player::updateWindowBoundsCollision(const sf::RenderTarget * target)
 {
-	if (this->shape.getGlobalBounds().left <= 0.f)
-		this->shape.setPosition(0.f, this->shape.getGlobalBounds().top);
+	if (this->sprite.getGlobalBounds().left <= 0.f)
+		this->sprite.setPosition(0.f, this->sprite.getGlobalBounds().top);
 
-	if (this->shape.getGlobalBounds().left + this->shape.getGlobalBounds().width >= target->getSize().x)
-		this->shape.setPosition(target->getSize().x - this->shape.getGlobalBounds().width, this->shape.getGlobalBounds().top);
+	if (this->sprite.getGlobalBounds().left + this->sprite.getGlobalBounds().width >= target->getSize().x)
+		this->sprite.setPosition(target->getSize().x - this->sprite.getGlobalBounds().width, this->sprite.getGlobalBounds().top);
 
-	if (this->shape.getGlobalBounds().top <= 0.f)
-		this->shape.setPosition(this->shape.getGlobalBounds().left, 0.f);
+	if (this->sprite.getGlobalBounds().top <= 0.f)
+		this->sprite.setPosition(this->sprite.getGlobalBounds().left, 0.f);
 
-	if (this->shape.getGlobalBounds().top + this->shape.getGlobalBounds().height >= target->getSize().y)
-		this->shape.setPosition(this->shape.getGlobalBounds().left, target->getSize().y - this->shape.getGlobalBounds().height);
+	if (this->sprite.getGlobalBounds().top + this->sprite.getGlobalBounds().height >= target->getSize().y)
+		this->sprite.setPosition(this->sprite.getGlobalBounds().left, target->getSize().y - this->sprite.getGlobalBounds().height);
 }
 
 void Player::update(const sf::RenderTarget* target)
@@ -56,5 +75,5 @@ void Player::update(const sf::RenderTarget* target)
 
 void Player::render(sf::RenderTarget * target)
 {
-	target->draw(this->shape);
+	target->draw(this->sprite);
 }

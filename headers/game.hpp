@@ -18,7 +18,7 @@ private:
     sf::Text timer{};
     sf::Font font{};
 
-    Player player;
+    Player *player;
     Map *map;
 
     void handleEvents();

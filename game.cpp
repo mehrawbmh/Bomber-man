@@ -6,11 +6,13 @@ Game::Game() {
     this->window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), GAME_TITLE);
     this->font.loadFromFile("fonts/arial.ttf");
     this->map = new Map(this->window, this->event);
+    this->player= new Player(0.f,0.f);
 }
 
 Game::~Game() {
     delete this->map;
     delete this->window;
+    delete this->player;
 }
 
 int Game::getRandomNumber(int startRange, int endRange) {
@@ -83,7 +85,7 @@ bool Game::isFinished() {
 
 void Game::updatePlayer()
 {
-	this->player.update(this->window);
+	this->player->update(this->window);
 }
 
 void Game::update() {
@@ -116,6 +118,6 @@ std::vector<std::vector<MapObject>> Game::readMap() {
 }
 void Game::render()
 {
-	this->player.render(this->window);
+	this->player->render(this->window);
     this->window->display();
 }
