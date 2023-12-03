@@ -20,7 +20,7 @@ $(BUILD_DIR):
 $(BUILD_DIR)/main.o: main.cpp
 	$(CC) -c main.cpp $(SFML_FLAGS) -o $(BUILD_DIR)/main.o;
 
-$(BUILD_DIR)/game.o: $(HEADERS_DIR)/game.hpp $(HEADERS_DIR)/map.hpp ./game.cpp
+$(BUILD_DIR)/game.o: $(HEADERS_DIR)/game.hpp $(HEADERS_DIR)/map.hpp $(HEADERS_DIR)/player.hpp ./game.cpp
 	$(CC) -c game.cpp $(SFML_FLAGS) -o $(BUILD_DIR)/game.o;
 
 $(BUILD_DIR)/map.o: $(HEADERS_DIR)/map.hpp ./map.cpp
