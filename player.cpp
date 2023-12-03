@@ -4,6 +4,7 @@ Player::Player(float x, float y)
 {
 	this->shape.setPosition(x, y);
     this->initShape();
+    this->movementSpeed = 10.f;
 }
 
 void Player::initShape()

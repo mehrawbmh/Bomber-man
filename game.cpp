@@ -80,14 +80,15 @@ bool Game::isClosed() {
 bool Game::isFinished() {
     return this->finished;
 }
+
 void Game::updatePlayer()
 {
 	this->player.update(this->window);
 }
 
 void Game::update() {
-    this->window->clear();
-    if (this->finished == false)
+    this->window->clear(sf::Color::White);
+    if (!this->isFinished())
 	{
 		this->updatePlayer();
 	}
@@ -106,17 +107,15 @@ std::vector<std::vector<MapObject>> Game::readMap() {
     MapObject wall1 = Wall1;
     MapObject wall2 = Wall2;
     std::vector<std::vector<MapObject>> vec = {
-            {grass, grass, wall1},
-            {grass, wall2, wall2, wall1, grass},
-            {wall1, grass, grass},
+            {grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
+            {grass, wall2, wall2, wall1, grass, grass, wall1, wall1, wall1},
+            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1},
     };
 
     return vec;
 }
 void Game::render()
 {
-	
-
 	this->player.render(this->window);
     this->window->display();
 }
