@@ -6,7 +6,7 @@ Game::Game() {
     this->window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), GAME_TITLE);
     this->font.loadFromFile("fonts/arial.ttf");
     this->map = new Map(this->window, this->event);
-    this->player= new Player(0.f,0.f);
+    this->player = new Player(0.f, 0.f);
 }
 
 Game::~Game() {
@@ -83,20 +83,17 @@ bool Game::isFinished() {
     return this->finished;
 }
 
-void Game::updatePlayer()
-{
-	this->player->update(this->window);
+void Game::updatePlayer() {
+    this->player->update(this->window);
 }
 
 void Game::update() {
     this->window->clear(sf::Color::White);
-    if (!this->isFinished())
-	{
-		this->updatePlayer();
-	}
+    if (!this->isFinished()) {
+        this->updatePlayer();
+    }
     this->updateTimer();
     this->map->update();
-
 }
 
 void Game::updateTimer() {
@@ -122,8 +119,8 @@ std::vector<std::vector<MapObject>> Game::readMap() {
 
     return vec;
 }
-void Game::render()
-{
-	this->player->render(this->window);
+
+void Game::render() {
+    this->player->render(this->window);
     this->window->display();
 }

@@ -55,8 +55,8 @@ sf::Sprite Map::createElement(MapObject element, int xPos, int yPos) {
     return sprite;
 }
 
-void Map::init(const std::vector<std::vector<MapObject>>& mapObjects) {
-    int x = 0, y = 0;
+void Map::init(const std::vector<std::vector<MapObject>> &mapObjects) {
+    int x, y = 0;
     for (const auto &elements: mapObjects) {
         x = 0;
         for (const auto &element: elements) {
