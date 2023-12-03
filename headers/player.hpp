@@ -7,20 +7,18 @@
 #include<vector>
 #include<sstream>
 
-#define MAX_HP 3;
-
 class Player {
 private:
     sf::RectangleShape shape;
 
     float movementSpeed;
-    int hp;
-
-    void initVariables();
+    int hp = 2;
 
     void initShape();
 
 public:
+    static const int MAX_HP = 3;
+
     Player(float x = 0.f, float y = 0.f);
 
     void updatePosition();
