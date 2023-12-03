@@ -49,7 +49,7 @@ void Game::initTimer() {
     this->timer.setFillColor(sf::Color::Black);
     this->timer.setCharacterSize(24);
     this->timer.setOutlineColor(sf::Color::Red);
-    this->timer.setPosition(static_cast<float>(this->window->getSize().x - 200), 0.f);
+    this->timer.setPosition(static_cast<float>(this->window->getSize().x - 190), 0.f);
     this->timer.setFont(this->font);
     std::cout << "Loading of timer finished\n";
 }
@@ -109,9 +109,15 @@ std::vector<std::vector<MapObject>> Game::readMap() {
     MapObject wall1 = Wall1;
     MapObject wall2 = Wall2;
     std::vector<std::vector<MapObject>> vec = {
-            {grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
-            {grass, wall2, wall2, wall1, grass, grass, wall1, wall1, wall1},
-            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1},
+            {grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
+            {grass, wall2, wall2, wall1, grass, grass, wall1, wall1, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
+            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
+            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
+            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
+            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
+            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
+            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
+            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
     };
 
     return vec;
