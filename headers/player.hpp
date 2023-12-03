@@ -7,7 +7,7 @@
 #include<vector>
 #include<sstream>
 
-const int MAX_HP = 3;
+#define MAX_HP 3;
 
 class Player {
 private:

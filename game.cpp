@@ -38,7 +38,7 @@ void Game::start() {
 void Game::run() {
     this->handleEvents();
     this->update();
-    this->window->display();
+    this->render();
 }
 
 void Game::initTimer() {
@@ -80,9 +80,17 @@ bool Game::isClosed() {
 bool Game::isFinished() {
     return this->finished;
 }
+void Game::updatePlayer()
+{
+	this->player.update(this->window);
+}
 
 void Game::update() {
-    this->window->clear(sf::Color::White);
+    this->window->clear();
+    if (this->finished == false)
+	{
+		this->updatePlayer();
+	}
     this->updateTimer();
     this->map->update();
 
@@ -104,4 +112,11 @@ std::vector<std::vector<MapObject>> Game::readMap() {
     };
 
     return vec;
+}
+void Game::render()
+{
+	
+
+	this->player.render(this->window);
+    this->window->display();
 }

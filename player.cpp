@@ -9,13 +9,13 @@ Player::Player(float x, float y)
 }
 void Player::initVariables()
 {
-	this->movementSpeed = 15.f;
-	this->hp = 2;
+	this->movementSpeed = 10.f;
+	this->hp = MAX_HP;
 }
 void Player::initShape()
 {
 	this->shape.setFillColor(sf::Color::Blue);
-	this->shape.setSize(sf::Vector2f(50.f, 50.f));
+	this->shape.setSize(sf::Vector2f(100.f, 100.f));
 }
 void Player::updatePosition()
 {

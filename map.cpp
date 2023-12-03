@@ -48,7 +48,7 @@ sf::Sprite Map::createElement(MapObject element, int xPos, int yPos) {
             break;
         }
         default:
-            std::cout << "NOT handling other map objets yet!\n";
+            std::cout << "NOT handling other map objects yet!\n";
     }
 
     sprite.setPosition(static_cast<float>(xPos), static_cast<float>(yPos));
