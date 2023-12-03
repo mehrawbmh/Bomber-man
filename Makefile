@@ -3,7 +3,7 @@ CC := g++ --std=c++20
 
 HEADERS_DIR := headers
 BUILD_DIR := build
-BIN_DIR := bin
+BIN_DIR := .
 
 TARGET := $(BIN_DIR)/$(PROJECT_NAME)
 
