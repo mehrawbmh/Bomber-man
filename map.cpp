@@ -1,4 +1,8 @@
 #include "headers/map.hpp"
+#include "headers/wall.hpp"
+#include "headers/grass.hpp"
+#include "headers/breakable_wall.hpp"
+#include "headers/non_breakable_wall.hpp"
 
 Map::Map(sf::RenderWindow *renderWindow, sf::Event _event) {
     this->window = renderWindow;
@@ -32,27 +36,26 @@ sf::Texture Map::createWall(int type) {
     return wallTexture;
 }
 
-sf::Sprite Map::createElement(MapObject element, int xPos, int yPos) {
+MapElement *Map::createElement(MapObject element, int xPos, int yPos) {
     sf::Sprite sprite;
+
     switch (element) {
-        case Grass: {
+        case GrassTexture: {
             sprite.setTexture(this->grass);
-            break;
+            return new Grass(sf::Vector2f(static_cast<float>(xPos), static_cast<float>(yPos)), sprite);
         }
         case Wall1: {
             sprite.setTexture(this->wall1);
-            break;
+            return new BreakableWall(sf::Vector2f(static_cast<float>(xPos), static_cast<float>(yPos)), sprite);
         }
         case Wall2: {
-            sprite.setTexture(this->wall2);
-            break;
+            sprite.setTexture(this->wall1);
+            return new NonBreakableWall(sf::Vector2f(static_cast<float>(xPos), static_cast<float>(yPos)), sprite);
         }
         default:
-            std::cout << "NOT handling other map objects yet!\n";
+            std::cout << "NOT handling other map objects yet!\n"; //todo raise error here
     }
-
-    sprite.setPosition(static_cast<float>(xPos), static_cast<float>(yPos));
-    return sprite;
+    return nullptr;
 }
 
 void Map::init(const std::vector<std::vector<MapObject>> &mapObjects) {
@@ -60,7 +63,7 @@ void Map::init(const std::vector<std::vector<MapObject>> &mapObjects) {
     for (const auto &elements: mapObjects) {
         x = 0;
         for (const auto &element: elements) {
-            this->sprites.push_back(this->createElement(element, x, y));
+            this->mapElements.push_back(this->createElement(element, x, y));
             x += ELEMENT_SIZE_X;
         }
         y += ELEMENT_SIZE_Y;
@@ -72,14 +75,14 @@ void Map::update() {
 }
 
 void Map::draw() {
-    for (const sf::Sprite &sprite: this->sprites) {
-        this->window->draw(sprite);
+    for (int i = 0; i < this->mapElements.size(); i++) {
+        this->mapElements[i]->draw(this->window);
     }
 }
 
 MapObject Map::mapObjectFactory(char item) {
     if (item == ' ') {
-        return MapObject::Grass;
+        return MapObject::GrassTexture;
     } else if (item == 'H') {
         return MapObject::EnemyH;
     } else if (item == 'V') {
