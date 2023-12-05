@@ -49,7 +49,9 @@ public:
     Map(sf::RenderWindow *_window, sf::Event _event);
 
     ~Map();
+    
 
+    const std::vector<MapElement*> giveMapElements()  const;
     void init(const std::vector<std::vector<MapObject>> &objects);
 
     static MapObject mapObjectFactory(char item);
