@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <istream>
 #include <random>
 #include <stdexcept>
 #include "headers/game.hpp"
@@ -52,7 +53,7 @@ void Game::initTimer() {
     this->timer.setFillColor(sf::Color::Black);
     this->timer.setCharacterSize(24);
     this->timer.setOutlineColor(sf::Color::Red);
-    this->timer.setPosition(static_cast<float>(this->window->getSize().x - 190), 0.f);
+    this->timer.setPosition(static_cast<float>(this->window->getSize().x - 150), 0.f);
     this->timer.setFont(this->font);
     std::cout << "Loading of timer finished\n";
 }
@@ -100,7 +101,11 @@ void Game::update() {
 }
 
 void Game::updateTimer() {
-    this->timer.setString("Timer: " + std::to_string(this->clock.getElapsedTime().asSeconds()));
+    float output = this->gameTime.asSeconds() - this->clock.getElapsedTime().asSeconds();
+    std::stringstream stream;
+    stream << "Timer: " << static_cast<int>(output / 60) << ": " << static_cast<int>(static_cast<int>(output) % 60);
+
+    this->timer.setString(stream.str());
     this->window->draw(this->timer);
 }
 

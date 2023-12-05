@@ -28,8 +28,8 @@ private:
 
     std::vector<MapElement*> mapElements;
 
-    int rows = 10;
-    int columns = 10;
+    int rows;
+    int columns;
 
     sf::RenderWindow *window;
     sf::Event event;
@@ -53,6 +53,8 @@ public:
     void init(const std::vector<std::vector<MapObject>> &objects);
 
     static MapObject mapObjectFactory(char item);
+
+    sf::Vector2f getMapSize() const;
 
     void update();
 };
