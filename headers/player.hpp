@@ -29,6 +29,7 @@ public:
 
     void updatePosition();
     void savePreviousLocation();
+    const sf::Sprite getSprite() const;
 
     void updateWindowBoundsCollision(const sf::RenderTarget *target);
 

@@ -28,6 +28,7 @@ void Player::initTexture()
 
 void Player::updatePosition()
 {
+	this->savePreviousLocation();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		this->sprite.move(-this->movementSpeed, 0.f);
@@ -83,4 +84,8 @@ void Player::savePreviousLocation()
 {
 	this->previous_x=this->sprite.getGlobalBounds().left;
 	this->previous_y=this->sprite.getGlobalBounds().top;
+}
+ const sf::Sprite Player::getSprite() const
+{
+	return this->sprite;
 }
