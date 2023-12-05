@@ -32,7 +32,7 @@ public:
     const sf::Sprite getSprite() const;
 
     void updateWindowBoundsCollision(const sf::RenderTarget *target);
-
+    void undoMovement();
     void update(const sf::RenderTarget *target);
 
     void render(sf::RenderTarget *target);

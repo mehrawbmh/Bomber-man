@@ -89,3 +89,7 @@ void Player::savePreviousLocation()
 {
 	return this->sprite;
 }
+void Player::undoMovement()
+{
+	this->sprite.setPosition(previous_x,previous_y);
+}
