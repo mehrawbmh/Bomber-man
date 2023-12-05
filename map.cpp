@@ -49,13 +49,12 @@ MapElement *Map::createElement(MapObject element, int xPos, int yPos) {
             return new BreakableWall(sf::Vector2f(static_cast<float>(xPos), static_cast<float>(yPos)), sprite);
         }
         case Wall2: {
-            sprite.setTexture(this->wall1);
+            sprite.setTexture(this->wall2);
             return new NonBreakableWall(sf::Vector2f(static_cast<float>(xPos), static_cast<float>(yPos)), sprite);
         }
         default:
-            std::cout << "NOT handling other map objects yet!\n"; //todo raise error here
+            throw std::runtime_error("Unknown element given to be created\n");
     }
-    return nullptr;
 }
 
 void Map::init(const std::vector<std::vector<MapObject>> &mapObjects) {
