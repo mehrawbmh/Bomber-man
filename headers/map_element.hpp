@@ -10,6 +10,7 @@ public:
     void setPosition(const sf::Vector2f &newPosition);
 
     virtual void draw(sf::RenderTarget *window) = 0;
+    const sf::Sprite getSprite() const;
 
 protected:
     sf::Vector2f position;
