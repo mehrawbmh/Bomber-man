@@ -125,6 +125,7 @@ void Game::readMap() {
 
     file.close();
     this->map->init(rows);
+    std::cout << "Map is in size of " << this->map->getMapSize().x << " * " << this->map->getMapSize().y << std::endl;
 }
 
 sf::Time Game::readGameTime(const std::string &timeString) {

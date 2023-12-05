@@ -4,18 +4,13 @@
 #include "headers/breakable_wall.hpp"
 #include "headers/non_breakable_wall.hpp"
 
-Map::Map(sf::RenderWindow *renderWindow, sf::Event _event) {
-    this->window = renderWindow;
-    this->event = _event;
-
+Map::Map(sf::RenderWindow *renderWindow, sf::Event _event): window(renderWindow), event(_event) {
     this->grass = this->createGrass();
     this->wall1 = this->createWall(1);
     this->wall2 = this->createWall(2);
 }
 
-Map::~Map() {
-
-}
+Map::~Map() = default;
 
 sf::Texture Map::createGrass() {
     sf::Texture grassTexture;
@@ -58,7 +53,10 @@ MapElement *Map::createElement(MapObject element, int xPos, int yPos) {
 }
 
 void Map::init(const std::vector<std::vector<MapObject>> &mapObjects) {
+    this->rows = static_cast<int>(mapObjects.size());
+    this->columns = static_cast<int>(mapObjects[0].size());
     int x, y = 0;
+
     for (const auto &elements: mapObjects) {
         x = 0;
         for (const auto &element: elements) {
@@ -69,13 +67,17 @@ void Map::init(const std::vector<std::vector<MapObject>> &mapObjects) {
     }
 }
 
+sf::Vector2f Map::getMapSize() const {
+    return {static_cast<float>(this->rows), static_cast<float>(this->columns)};
+}
+
 void Map::update() {
     this->draw();
 }
 
 void Map::draw() {
-    for (int i = 0; i < this->mapElements.size(); i++) {
-        this->mapElements[i]->draw(this->window);
+    for (auto &mapElement: this->mapElements) {
+        mapElement->draw(this->window);
     }
 }
 

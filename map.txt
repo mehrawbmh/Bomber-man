@@ -1,11 +1,11 @@
 2:34
-B PP  B BP P  B
-BB PP   PPB P P
-B       BBP P P
-B       BBP P P
-P             B
-B       BBP P P
-B PP  B BP P  B
-B PP  B BP P  B
-B PP  B BP P  B
-PP           BB
+ B PP  B BP P  B
+  B PP   PPB P P
+         BBP P P
+         BBP P P
+ P             B
+PB       BBP P P
+PB PP  B BP P  B
+BB PP  B BP P  B
+ B PP  B BP P  B
+ PP           BB
