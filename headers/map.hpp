@@ -5,9 +5,10 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "map_element.hpp"
 
 enum MapObject {
-    Wall1, Wall2, Door, Grass, EnemyH, EnemyV
+    Wall1, Wall2, Door, GrassTexture, EnemyH, EnemyV
 };
 
 const int ELEMENT_SIZE_Y = 100;
@@ -25,7 +26,7 @@ private:
     const std::string KEY2_FILE = "key2.png";
     const std::string KEY3_FILE = "key3.jpg";
 
-    std::vector<sf::Sprite> sprites;
+    std::vector<MapElement*> mapElements;
 
     int rows = 10;
     int columns = 10;
@@ -36,7 +37,7 @@ private:
     sf::Texture wall1;
     sf::Texture wall2;
 
-    sf::Sprite createElement(MapObject element, int x, int y);
+    MapElement *createElement(MapObject element, int x, int y);
 
     sf::Texture createGrass();
 
