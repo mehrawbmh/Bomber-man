@@ -7,7 +7,7 @@ class BreakableWall : public Wall {
 public:
     BreakableWall(const sf::Vector2f &position, sf::Sprite _sprite);
 
-    bool canBreak();
+    bool canBreak() override;
 };
 
 #endif

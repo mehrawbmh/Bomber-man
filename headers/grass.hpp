@@ -7,7 +7,7 @@ class Grass : public MapElement {
 public:
     Grass(const sf::Vector2f &position, sf::Sprite _sprite);
 
-    void draw(sf::RenderTarget *window);
+    void draw(sf::RenderTarget *window) override;
 };
 
 #endif

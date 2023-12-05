@@ -7,7 +7,7 @@ class Wall: public MapElement {
 public:
     Wall(const sf::Vector2f& position);
 
-    virtual void draw(sf::RenderTarget *window);
+    void draw(sf::RenderTarget *window) override;
 
     virtual bool canBreak() = 0;
 };
