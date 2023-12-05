@@ -6,7 +6,8 @@ Player::Player(float x, float y)
 	this->previous_x=x;
 	this->previous_y=y;
     this->initTexture();
-	this->sprite.setTexture(this->upwards_texture);
+	this->sprite.setTexture(this->downwards_texture);
+	this->sprite.setScale(0.9,0.9);
     this->movementSpeed = 3.f;
 }
 

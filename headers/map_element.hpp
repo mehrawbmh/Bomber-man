@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 
-enum MapElementTypes {GRASS = 0, BREAKABLE_WALL, UNBREAKALBE_WALL, NROFTYPES};
+enum MapElementTypes {GRASS = 0, BREAKABLE_WALL, UNBREAKABLE_WALL, NROFTYPES};
 class MapElement {
 public:
     MapElement(const sf::Vector2f &position);
