@@ -3,6 +3,8 @@
 Player::Player(float x, float y)
 {
 	this->sprite.setPosition(x, y);
+	this->previous_x=x;
+	this->previous_y=y;
     this->initTexture();
 	this->sprite.setTexture(this->upwards_texture);
     this->movementSpeed = 3.f;

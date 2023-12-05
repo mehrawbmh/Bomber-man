@@ -15,6 +15,9 @@ private:
     sf::Texture right_texture;
     sf::Texture left_texture;
 
+
+    float previous_x;
+    float previous_y;
     float movementSpeed;
     int hp = 2;
     void initTexture();
