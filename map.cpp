@@ -76,3 +76,22 @@ void Map::draw() {
         this->window->draw(sprite);
     }
 }
+
+MapObject Map::mapObjectFactory(char item) {
+    if (item == ' ') {
+        return MapObject::Grass;
+    } else if (item == 'H') {
+        return MapObject::EnemyH;
+    } else if (item == 'V') {
+        return MapObject::EnemyV;
+    } else if (item == 'B') {
+        return MapObject::Wall1;
+    } else if (item == 'P') {
+        return MapObject::Wall2;
+    } else if (item == 'D') {
+        return MapObject::Door;
+    } else {
+        throw std::logic_error("Invalid Map operator in txt file detected!\n");
+    }
+}
+

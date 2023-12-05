@@ -1,5 +1,8 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <random>
+#include <stdexcept>
 #include "headers/game.hpp"
 
 Game::Game() {
@@ -30,7 +33,7 @@ void Game::start() {
     this->initTimer();
 
     std::cout << "Loading map...\n";
-    this->map->init(this->readMap());
+    this->readMap();
     std::cout << "Loading of map finished\n";
 
     this->window->display();
@@ -101,23 +104,40 @@ void Game::updateTimer() {
     this->window->draw(this->timer);
 }
 
-std::vector<std::vector<MapObject>> Game::readMap() {
-    MapObject grass = Grass;
-    MapObject wall1 = Wall1;
-    MapObject wall2 = Wall2;
-    std::vector<std::vector<MapObject>> vec = {
-            {grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
-            {grass, wall2, wall2, wall1, grass, grass, wall1, wall1, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
-            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
-            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
-            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
-            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
-            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
-            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
-            {wall1, grass, grass, grass, wall2, wall2, wall2, grass, wall1, grass, grass, wall1, grass, grass, grass, wall1, wall2, wall1},
-    };
+void Game::readMap() {
+    std::ifstream file(MAP_INIT_FILE);
+    if (!file.is_open()) {
+        throw std::ifstream::failure("could not open map file!\n");
+    }
 
-    return vec;
+    std::string line, timeString;
+    getline(file, timeString);
+    this->gameTime = readGameTime(timeString);
+
+    std::vector<std::vector<MapObject>> rows;
+    while (getline(file, line)) {
+        std::vector<MapObject> row;
+        for (const char &item: line) {
+            row.push_back(Map::mapObjectFactory(item));
+        }
+        rows.push_back(row);
+    }
+
+    file.close();
+    this->map->init(rows);
+}
+
+sf::Time Game::readGameTime(const std::string &timeString) {
+    std::istringstream iss(timeString);
+    int minute, second;
+    char delimiter = ':';
+    iss >> minute >> delimiter >> second;
+
+    sf::Time time = sf::Time::Zero;
+    time += sf::seconds(static_cast<float>(second));
+    time += sf::seconds(static_cast<float>(minute * 60));
+
+    return time;
 }
 
 void Game::render() {

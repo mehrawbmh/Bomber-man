@@ -17,6 +17,7 @@ private:
     sf::Clock clock{};
     sf::Text timer{};
     sf::Font font{};
+    sf::Time gameTime;
 
     Player *player;
     Map *map;
@@ -27,7 +28,8 @@ private:
 
     void updateTimer();
 
-    std::vector<std::vector<MapObject>> readMap();
+    void readMap();
+    static sf::Time readGameTime(const std::string &timeString);
 
 public:
     Game();

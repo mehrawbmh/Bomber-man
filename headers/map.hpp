@@ -51,6 +51,8 @@ public:
 
     void init(const std::vector<std::vector<MapObject>> &objects);
 
+    static MapObject mapObjectFactory(char item);
+
     void update();
 };
 
