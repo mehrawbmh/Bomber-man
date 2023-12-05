@@ -2,3 +2,10 @@
 B PP  B BP P  B
 BB PP   PPB P P
 B       BBP P P
+B       BBP P P
+P             B
+B       BBP P P
+B PP  B BP P  B
+B PP  B BP P  B
+B PP  B BP P  B
+PP           BB
