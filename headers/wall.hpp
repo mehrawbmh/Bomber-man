@@ -3,6 +3,8 @@
 
 #include "map_element.hpp"
 
+
+
 class Wall: public MapElement {
 public:
     Wall(const sf::Vector2f& position);
