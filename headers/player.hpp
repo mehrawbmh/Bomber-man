@@ -28,6 +28,7 @@ public:
     Player(float x = 0.f, float y = 0.f);
 
     void updatePosition();
+    void savePreviousLocation();
 
     void updateWindowBoundsCollision(const sf::RenderTarget *target);
 

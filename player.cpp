@@ -79,3 +79,8 @@ void Player::render(sf::RenderTarget * target)
 {
 	target->draw(this->sprite);
 }
+void Player::savePreviousLocation()
+{
+	this->previous_x=this->sprite.getGlobalBounds().left;
+	this->previous_y=this->sprite.getGlobalBounds().top;
+}
