@@ -6,7 +6,7 @@
 .idea/
 
 bin/
-headers/
+build/
 
 # Compiled Object files
 *.slo
