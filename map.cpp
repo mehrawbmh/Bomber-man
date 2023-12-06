@@ -4,10 +4,11 @@
 #include "headers/breakable_wall.hpp"
 #include "headers/non_breakable_wall.hpp"
 
-Map::Map(sf::RenderWindow *renderWindow, sf::Event _event): window(renderWindow), event(_event) {
+Map::Map(sf::RenderWindow *renderWindow, sf::Event _event) : window(renderWindow), event(_event) {
     this->grass = this->createGrass();
     this->wall1 = this->createWall(1);
     this->wall2 = this->createWall(2);
+    this->door = this->createDoor();
 }
 
 Map::~Map() = default;
@@ -31,6 +32,16 @@ sf::Texture Map::createWall(int type) {
     return wallTexture;
 }
 
+sf::Texture Map::createDoor() {
+    sf::Texture doorTexture;
+    std::string file = DOOR_FILE;
+    if (doorTexture.loadFromFile(BASE_SPRITES_DIR + "/" + file)) {
+        doorTexture.setSmooth(true);
+    }
+    doorTexture.setSrgb(true);
+    return doorTexture;
+}
+
 MapElement *Map::createElement(MapObject element, int xPos, int yPos) {
     sf::Sprite sprite;
 
@@ -46,6 +57,10 @@ MapElement *Map::createElement(MapObject element, int xPos, int yPos) {
         case Wall2: {
             sprite.setTexture(this->wall2);
             return new NonBreakableWall(sf::Vector2f(static_cast<float>(xPos), static_cast<float>(yPos)), sprite);
+        }
+        case Door: {
+            sprite.setTexture(this->door);
+            return new BreakableWall(sf::Vector2f(static_cast<float>(xPos), static_cast<float>(yPos)), sprite);
         }
         default:
             throw std::runtime_error("Unknown element given to be created\n");

@@ -25,6 +25,7 @@ private:
     const std::string KEY_FILE = "key.png";
     const std::string KEY2_FILE = "key2.png";
     const std::string KEY3_FILE = "key3.jpg";
+    const std::string DOOR_FILE = "door.png";
 
     std::vector<MapElement*> mapElements;
 
@@ -36,12 +37,15 @@ private:
     sf::Texture grass;
     sf::Texture wall1;
     sf::Texture wall2;
+    sf::Texture door;
 
     MapElement *createElement(MapObject element, int x, int y);
 
     sf::Texture createGrass();
 
     sf::Texture createWall(int type);
+
+    sf::Texture createDoor();
 
     void draw();
 
