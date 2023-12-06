@@ -8,9 +8,9 @@
 
 Game::Game() {
     this->window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), GAME_TITLE);
-    this->font.loadFromFile("fonts/arial.ttf");
+    this->font.loadFromFile(DEFAULT_FONT_FILE);
     this->map = new Map(this->window, this->event);
-    this->player = new Player(0.f, 0.f);
+    this->player = new Player(200.f, 100.f);
 }
 
 Game::~Game() {
@@ -96,6 +96,7 @@ void Game::update() {
     if (!this->isFinished()) {
         this->updatePlayer();
     }
+    this->updateCollision();
     this->updateTimer();
     this->map->update();
 }
@@ -149,4 +150,23 @@ sf::Time Game::readGameTime(const std::string &timeString) {
 void Game::render() {
     this->player->render(this->window);
     this->window->display();
+}
+void Game::updateCollision()
+{
+    std::vector<MapElement*> elements=this->map->giveMapElements();
+    for(size_t i=0; i< elements.size();i++ ){
+        if(this->player->getSprite().getGlobalBounds().intersects(elements[i]->getSprite().getGlobalBounds())){
+            switch (elements[i]->type)
+            {
+            case MapElementTypes::UNBREAKABLE_WALL:
+                this->player->undoMovement();
+                break;
+            case MapElementTypes::BREAKABLE_WALL:
+                this->player->undoMovement();
+                break;
+            default:
+                break;
+            }
+        }
+    }
 }

@@ -99,3 +99,8 @@ MapObject Map::mapObjectFactory(char item) {
     }
 }
 
+const std::vector<MapElement*> Map::giveMapElements() const
+{
+    return mapElements;
+}
+

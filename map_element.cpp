@@ -5,3 +5,9 @@ void MapElement::setPosition(const sf::Vector2f &newPosition) {
 }
 
 MapElement::MapElement(const sf::Vector2f &position): position(position) {}
+
+
+const sf::Sprite MapElement::getSprite() const
+{
+    return this->sprite;
+}

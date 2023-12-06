@@ -3,8 +3,11 @@
 Player::Player(float x, float y)
 {
 	this->sprite.setPosition(x, y);
+	this->previous_x=x;
+	this->previous_y=y;
     this->initTexture();
-	this->sprite.setTexture(this->upwards_texture);
+	this->sprite.setTexture(this->downwards_texture);
+	this->sprite.setScale(0.8,0.8);
     this->movementSpeed = 3.f;
 }
 
@@ -26,6 +29,7 @@ void Player::initTexture()
 
 void Player::updatePosition()
 {
+	this->savePreviousLocation();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		this->sprite.move(-this->movementSpeed, 0.f);
@@ -76,4 +80,17 @@ void Player::update(const sf::RenderTarget* target)
 void Player::render(sf::RenderTarget * target)
 {
 	target->draw(this->sprite);
+}
+void Player::savePreviousLocation()
+{
+	this->previous_x=this->sprite.getGlobalBounds().left;
+	this->previous_y=this->sprite.getGlobalBounds().top;
+}
+ const sf::Sprite Player::getSprite() const
+{
+	return this->sprite;
+}
+void Player::undoMovement()
+{
+	this->sprite.setPosition(previous_x,previous_y);
 }

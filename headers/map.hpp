@@ -50,6 +50,7 @@ public:
 
     ~Map();
 
+    const std::vector<MapElement*> giveMapElements()  const;
     void init(const std::vector<std::vector<MapObject>> &objects);
 
     static MapObject mapObjectFactory(char item);

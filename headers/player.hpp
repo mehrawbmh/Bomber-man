@@ -15,6 +15,9 @@ private:
     sf::Texture right_texture;
     sf::Texture left_texture;
 
+
+    float previous_x;
+    float previous_y;
     float movementSpeed;
     int hp = 2;
     void initTexture();
@@ -25,9 +28,11 @@ public:
     Player(float x = 0.f, float y = 0.f);
 
     void updatePosition();
+    void savePreviousLocation();
+    const sf::Sprite getSprite() const;
 
     void updateWindowBoundsCollision(const sf::RenderTarget *target);
-
+    void undoMovement();
     void update(const sf::RenderTarget *target);
 
     void render(sf::RenderTarget *target);
