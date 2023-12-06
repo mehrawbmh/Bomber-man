@@ -1,13 +1,10 @@
 #include "headers/player.hpp"
 
-Player::Player(float x, float y)
+Player::Player(float x, float y): previous_y(y), previous_x(x)
 {
 	this->sprite.setPosition(x, y);
-	this->previous_x=x;
-	this->previous_y=y;
     this->initTexture();
 	this->sprite.setTexture(this->downwards_texture);
-	this->sprite.setScale(0.8,0.8);
     this->movementSpeed = 3.f;
 }
 
