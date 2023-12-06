@@ -7,7 +7,7 @@
 
 Game::Game() {
     this->window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), GAME_TITLE);
-    this->font.loadFromFile("fonts/arial.ttf");
+    this->font.loadFromFile(DEFAULT_FONT_FILE);
     this->map = new Map(this->window, this->event);
     this->player = new Player(200.f, 100.f);
 }

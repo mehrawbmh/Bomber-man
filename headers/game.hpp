@@ -7,6 +7,7 @@
 
 const std::string GAME_TITLE = "Bomber-man";
 const std::string MAP_INIT_FILE = "map.txt";
+const std::string DEFAULT_FONT_FILE = "fonts/arial.ttf";
 
 class Game {
 private:
