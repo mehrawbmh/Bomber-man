@@ -19,15 +19,20 @@ private:
     float previous_x;
     float previous_y;
     float movementSpeed;
-    int hp = 2;
+    int hp = DEFAULT_HP;
+    bool bombPlanted = false;
+    long lastPlantBombTime = 0;
     void initTexture();
 
 public:
     static const int MAX_HP = 3;
+    static const int DEFAULT_HP = 2;
 
     Player(float x = 0.f, float y = 0.f);
 
     void updatePosition();
+    void updateBomb();
+    bool isThrownBomb() const;
     void savePreviousLocation();
     const sf::Sprite getSprite() const;
 

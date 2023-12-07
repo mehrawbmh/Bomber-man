@@ -24,6 +24,21 @@ void Player::initTexture()
 	}
 }
 
+void Player::updateBomb() {
+    if (this->bombPlanted) {
+        this->bombPlanted = false;
+    } else {
+        this->bombPlanted = sf::Keyboard::isKeyPressed(sf::Keyboard::X) && (time(nullptr) > (this->lastPlantBombTime + 1));
+        if (this->bombPlanted) {
+            this->lastPlantBombTime = time(nullptr);
+        }
+    }
+}
+
+bool Player::isThrownBomb() const {
+    return this->bombPlanted;
+}
+
 void Player::updatePosition()
 {
 	this->savePreviousLocation();
@@ -70,6 +85,7 @@ void Player::updateWindowBoundsCollision(const sf::RenderTarget * target)
 
 void Player::update(const sf::RenderTarget* target)
 {
+    this->updateBomb();
 	this->updatePosition();
 	this->updateWindowBoundsCollision(target);
 }
