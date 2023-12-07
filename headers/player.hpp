@@ -2,10 +2,8 @@
 #define PLAYER "PLAYER.hpp"
 
 #include "person.hpp"
-#include<iostream>
-#include<ctime>
-#include<vector>
-#include<sstream>
+
+
 
 class Player : public Person {
 private:

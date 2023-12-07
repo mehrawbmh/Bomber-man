@@ -1,8 +1,11 @@
 #ifndef PERSON
 #define PERSON "person.hpp"
 
+#include<iostream>
 #include <SFML/Graphics.hpp>
-
+#include<ctime>
+#include<vector>
+#include<sstream>
 
 class Person
 {
@@ -25,7 +28,7 @@ public:
 
     const sf::Sprite getSprite() const;
     void savePreviousLocation();
-    void updateWindowBoundsCollision(const sf::RenderTarget *target);
+    int updateWindowBoundsCollision(const sf::RenderTarget *target);
     void undoMovement();
     void render(sf::RenderTarget *target);
 };
