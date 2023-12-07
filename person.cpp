@@ -9,18 +9,24 @@ Person::Person(float x,float y,float previous_x,float previous_y)
 
 int Person::updateWindowBoundsCollision(const sf::RenderTarget * target)
 {
+	int collisionHappened=0;
 	if (this->sprite.getGlobalBounds().left <= 0.f){
 		this->sprite.setPosition(0.f, this->sprite.getGlobalBounds().top);
+		collisionHappened=1;
 	}
 	if (this->sprite.getGlobalBounds().left + this->sprite.getGlobalBounds().width >= target->getSize().x){
 		this->sprite.setPosition(target->getSize().x - this->sprite.getGlobalBounds().width, this->sprite.getGlobalBounds().top);
+		collisionHappened=1;
 	}
 	if (this->sprite.getGlobalBounds().top <= 0.f){
 		this->sprite.setPosition(this->sprite.getGlobalBounds().left, 0.f);
+		collisionHappened=1;
 	}
 	if (this->sprite.getGlobalBounds().top + this->sprite.getGlobalBounds().height >= target->getSize().y){
 		this->sprite.setPosition(this->sprite.getGlobalBounds().left, target->getSize().y - this->sprite.getGlobalBounds().height);
+		collisionHappened=1;
 	}
+	return collisionHappened;
 }
 void Person::render(sf::RenderTarget * target)
 {

@@ -3,8 +3,8 @@
 #include "person.hpp"
 #include "random_generator.hpp"
 
-enum EnemyTypes {HORIZONtAL = 0,VERTICAL,NROFTYPES};
-enum InitialDirectionTypes {UP_LEFT = 0, DOWN_RIGHT,NROFTYPES};
+enum EnemyTypes {HORIZONtAL = 0,VERTICAL};
+enum InitialDirectionTypes {UP_LEFT = 0, DOWN_RIGHT};
 class Enemy: public Person {
 private:
 
