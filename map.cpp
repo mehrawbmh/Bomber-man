@@ -4,12 +4,18 @@
 #include "headers/breakable_wall.hpp"
 #include "headers/non_breakable_wall.hpp"
 #include "headers/door.hpp"
+#include "headers/key.hpp"
+#include "headers/random_generator.hpp"
 
 Map::Map(sf::RenderWindow *renderWindow, sf::Event _event) : window(renderWindow), event(_event) {
     this->grass = this->createGrass();
     this->wall1 = this->createWall(1);
     this->wall2 = this->createWall(2);
     this->door = this->createDoor();
+    this->key1 = this->createKey(1);
+    this->key2 = this->createKey(2);
+    this->key3 = this->createKey(3);
+    this->keys = {key1, key2, key3};
 }
 
 Map::~Map() = default;
@@ -33,14 +39,60 @@ sf::Texture Map::createWall(int type) {
     return wallTexture;
 }
 
+sf::Texture Map::createKey(int type) {
+    std::string file;
+    switch (type)
+    {
+    case 1:
+        file = this->KEY1_FILE;
+        break;
+    case 2:
+        file = this->KEY2_FILE;
+        break;
+    case 3:
+        file = this->KEY3_FILE;
+        break;
+    default:
+        break;
+    }
+
+    sf::Texture keyTexture;
+    if (keyTexture.loadFromFile(BASE_SPRITES_DIR + "/" + file)) {
+        keyTexture.getSize();
+        keyTexture.setSmooth(true);
+    };
+
+    return keyTexture;
+}
+
 sf::Texture Map::createDoor() {
     sf::Texture doorTexture;
     std::string file = DOOR_FILE;
     if (doorTexture.loadFromFile(BASE_SPRITES_DIR + "/" + file)) {
         doorTexture.setSmooth(true);
     }
+
     doorTexture.setSrgb(true);
     return doorTexture;
+}
+
+void Map::placeKeysUnderWalls() {
+    RandomNumberGenerator generator(0, this->mapElements.size() - 1);
+    int count = 0;
+    while (count < AVAILABLE_KEYS) {
+        int rand = generator.generateRandomNumber();
+        if (dynamic_cast<BreakableWall*>(this->mapElements[rand])) {
+            sf::Sprite sprite;
+            sf::Vector2f position = this->mapElements[rand]->getPosition();
+            sprite.setPosition(position);
+            sprite.setTexture(this->keys[count]);
+            sprite.setColor(sf::Color::White);
+            sprite.setScale(0.85f, 0.95f);
+            this->mapElements.push_back(new Key(position, sprite));
+            std::cout << "placed a key under sprite of " << position.x << ':' << position.y << std::endl;
+            count++;
+        }
+    }
 }
 
 MapElement *Map::createElement(MapObject element, int xPos, int yPos) {
@@ -81,6 +133,8 @@ void Map::init(const std::vector<std::vector<MapObject>> &mapObjects) {
         }
         y += ELEMENT_SIZE_Y;
     }
+
+    this->placeKeysUnderWalls();
 }
 
 sf::Vector2f Map::getMapSize() const {

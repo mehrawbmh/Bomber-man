@@ -22,10 +22,11 @@ private:
     const std::string BOMB_FILE = "omb.png";
     const std::string WALL1_FILE = "wall-1.png";
     const std::string WALL2_FILE = "wall-2.png";
-    const std::string KEY_FILE = "key.png";
+    const std::string KEY1_FILE = "key.png";
     const std::string KEY2_FILE = "key2.png";
     const std::string KEY3_FILE = "key3.jpg";
     const std::string DOOR_FILE = "door.png";
+    const int AVAILABLE_KEYS = 3;
 
     std::vector<MapElement*> mapElements;
 
@@ -38,6 +39,10 @@ private:
     sf::Texture wall1;
     sf::Texture wall2;
     sf::Texture door;
+    sf::Texture key1;
+    sf::Texture key2;
+    sf::Texture key3;
+    std::vector<sf::Texture> keys;
 
     MapElement *createElement(MapObject element, int x, int y);
 
@@ -45,7 +50,11 @@ private:
 
     sf::Texture createWall(int type);
 
+    sf::Texture createKey(int type);
+
     sf::Texture createDoor();
+
+    void placeKeysUnderWalls();
 
     void draw();
 
