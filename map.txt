@@ -4,7 +4,7 @@
          BBP P  P
          BBP P  P
  P              B
-PB       BBP P  P
+PB H   V BBP P  P
 PB PP  B BD P   B
 BB PP  B BP P   
  B PP  B BP P   B
