@@ -8,3 +8,5 @@ NonBreakableWall::NonBreakableWall(const sf::Vector2f &position, sf::Sprite _spr
 bool NonBreakableWall::canBreak() {
     return false;
 }
+
+void NonBreakableWall::destroy() {}
