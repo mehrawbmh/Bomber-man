@@ -165,10 +165,6 @@ void Map::update() {
 }
 
 void Map::draw() {
-    // for (auto &mapElement: this->mapElements) {
-    //     mapElement->draw(this->window);
-    // }
-
     for (auto &grass: this->grasses) {
         grass->draw(this->window);
     }
