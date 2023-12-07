@@ -45,7 +45,7 @@ public:
     void render();
 
     void initTimer();
-    void updateCollision();
+    
     bool isFinished();
 
     static int getRandomNumber(int startRange, int endRange);

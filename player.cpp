@@ -53,10 +53,11 @@ void Player::updatePosition()
 
 
 
-void Player::update(const sf::RenderTarget* target)
+void Player::update(const sf::RenderTarget* target,std::vector<MapElement*> elements)
 {
 	this->updatePosition();
 	this->updateWindowBoundsCollision(target);
+	this->updateCollision(elements);
 }
 
 

@@ -88,15 +88,12 @@ bool Game::isFinished() {
 }
 
 void Game::updatePlayer() {
-    this->player->update(this->window);
+    this->player->update(this->window,this->map->giveMapElements());
 }
 
 void Game::update() {
     this->window->clear(sf::Color::Black);
-    if (!this->isFinished()) {
-        this->updatePlayer();
-    }
-    this->updateCollision();
+    this->updatePlayer();
     this->updateTimer();
     this->map->update();
 }
@@ -152,26 +149,4 @@ void Game::render() {
     this->window->display();
 }
 
-void Game::updateCollision() {
-    std::vector<MapElement*> elements=this->map->giveMapElements();
-    for(size_t i=0; i< elements.size();i++ ){
-        sf::Sprite playerScaledSprite = this->player->getSprite();
-        sf::Sprite elementScaledSprite = elements[i]->getSprite();
-        playerScaledSprite.setScale(0.75, 0.75);
-        elementScaledSprite.setScale(0.75, 0.75);
 
-        if (playerScaledSprite.getGlobalBounds().intersects(elementScaledSprite.getGlobalBounds())){
-            switch (elements[i]->type)
-            {
-            case MapElementTypes::UNBREAKABLE_WALL:
-                this->player->undoMovement();
-                break;
-            case MapElementTypes::BREAKABLE_WALL:
-                this->player->undoMovement();
-                break;
-            default:
-                break;
-            }
-        }
-    }
-}

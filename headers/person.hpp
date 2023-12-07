@@ -1,6 +1,7 @@
 #ifndef PERSON
 #define PERSON "person.hpp"
 
+#include "map_element.hpp"
 #include<iostream>
 #include <SFML/Graphics.hpp>
 #include<ctime>
@@ -30,6 +31,7 @@ public:
     void savePreviousLocation();
     int updateWindowBoundsCollision(const sf::RenderTarget *target);
     void undoMovement();
+    void updateCollision( std::vector<MapElement*> elements);
     void render(sf::RenderTarget *target);
 };
 
