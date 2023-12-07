@@ -30,7 +30,7 @@ int Game::getRandomNumber(int startRange, int endRange) {
 
 void Game::start() {
     this->window->setFramerateLimit(100); //TODO: change it?
-    this->window->clear(sf::Color::White);
+    this->window->clear(sf::Color::Black);
     this->initTimer();
 
     std::cout << "Loading map...\n";
@@ -50,7 +50,7 @@ void Game::run() {
 void Game::initTimer() {
     std::cout << "Loading timer...\n";
     this->clock.restart();
-    this->timer.setFillColor(sf::Color::Black);
+    this->timer.setFillColor(sf::Color::White);
     this->timer.setCharacterSize(24);
     this->timer.setOutlineColor(sf::Color::Red);
     this->timer.setPosition(static_cast<float>(this->window->getSize().x - 150), 0.f);
@@ -92,7 +92,7 @@ void Game::updatePlayer() {
 }
 
 void Game::update() {
-    this->window->clear(sf::Color::White);
+    this->window->clear(sf::Color::Black);
     if (!this->isFinished()) {
         this->updatePlayer();
     }
