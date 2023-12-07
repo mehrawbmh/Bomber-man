@@ -39,6 +39,7 @@ public:
 
     void start();
     void updatePlayer();
+    void updateMap();
     bool isClosed();
 
     void run();
@@ -46,7 +47,7 @@ public:
 
     void initTimer();
     void updateCollision();
-    bool isFinished();
+    bool isFinished() const;
 
     static int getRandomNumber(int startRange, int endRange);
 };

@@ -5,6 +5,7 @@
 #include <random>
 #include <stdexcept>
 #include "headers/game.hpp"
+#include "headers/breakable_wall.hpp"
 
 Game::Game() {
     this->window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), GAME_TITLE);
@@ -83,22 +84,28 @@ bool Game::isClosed() {
     return !this->window->isOpen();
 }
 
-bool Game::isFinished() {
+bool Game::isFinished() const {
     return this->finished;
 }
 
 void Game::updatePlayer() {
     this->player->update(this->window);
+    if (this->player->isThrownBomb()) {
+        std::cout << "Planting bomb...\n";
+        this->map->plantBomb(this->player->getSprite().getPosition());
+    }
+}
+
+void Game::updateMap() {
+    this->map->update();
 }
 
 void Game::update() {
     this->window->clear(sf::Color::Black);
-    if (!this->isFinished()) {
-        this->updatePlayer();
-    }
+    this->updatePlayer();
     this->updateCollision();
     this->updateTimer();
-    this->map->update();
+    this->updateMap();
 }
 
 void Game::updateTimer() {
@@ -166,9 +173,13 @@ void Game::updateCollision() {
             case MapElementTypes::UNBREAKABLE_WALL:
                 this->player->undoMovement();
                 break;
-            case MapElementTypes::BREAKABLE_WALL:
-                this->player->undoMovement();
+            case MapElementTypes::BREAKABLE_WALL: {
+                auto *breakable = dynamic_cast<BreakableWall *>(elements[i]);
+                if (!breakable->isBrokenBefore()) {
+                    this->player->undoMovement();
+                }
                 break;
+            }
             default:
                 break;
             }
