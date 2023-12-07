@@ -8,7 +8,7 @@
 #include "map_element.hpp"
 
 enum MapObject {
-    Wall1, Wall2, Door, GrassTexture, EnemyH, EnemyV
+    Wall1, Wall2, DoorTexture, GrassTexture, EnemyH, EnemyV
 };
 
 const int ELEMENT_SIZE_Y = 100;
@@ -19,7 +19,7 @@ const std::string BASE_SPRITES_DIR = "sprites";
 class Map {
 private:
     const std::string GRASS_FILE = "grass.png";
-    const std::string BOMB_FILE = "bomb.png";
+    const std::string BOMB_FILE = "omb.png";
     const std::string WALL1_FILE = "wall-1.png";
     const std::string WALL2_FILE = "wall-2.png";
     const std::string KEY_FILE = "key.png";

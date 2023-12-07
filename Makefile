@@ -44,8 +44,11 @@ $(BUILD_DIR)/non_breakable_wall.o: $(HEADERS_DIR)/non_breakable_wall.hpp ./non_b
 $(BUILD_DIR)/grass.o: $(HEADERS_DIR)/grass.hpp ./grass.cpp $(BUILD_DIR)/map_element.o
 	$(CC) -c grass.cpp $(SFML_FLAGS) -o $(BUILD_DIR)/grass.o
 
-$(TARGET): $(BUILD_DIR) $(BIN_DIR) $(BUILD_DIR)/main.o $(BUILD_DIR)/game.o $(BUILD_DIR)/map.o $(BUILD_DIR)/player.o $(BUILD_DIR)/wall.o $(BUILD_DIR)/map_element.o $(BUILD_DIR)/breakable_wall.o $(BUILD_DIR)/non_breakable_wall.o $(BUILD_DIR)/grass.o
-	$(CC) $(BUILD_DIR)/main.o $(BUILD_DIR)/game.o $(BUILD_DIR)/map.o $(BUILD_DIR)/player.o $(BUILD_DIR)/wall.o $(BUILD_DIR)/map_element.o $(BUILD_DIR)/breakable_wall.o $(BUILD_DIR)/non_breakable_wall.o $(BUILD_DIR)/grass.o -o $(TARGET) $(SFML_FLAGS);
+$(BUILD_DIR)/door.o: $(HEADERS_DIR)/door.hpp ./door.cpp $(BUILD_DIR)/map_element.o
+	$(CC) -c door.cpp $(SFML_FLAGS) -o $(BUILD_DIR)/door.o
+
+$(TARGET): $(BUILD_DIR) $(BIN_DIR) $(BUILD_DIR)/main.o $(BUILD_DIR)/game.o $(BUILD_DIR)/map.o $(BUILD_DIR)/player.o $(BUILD_DIR)/wall.o $(BUILD_DIR)/map_element.o $(BUILD_DIR)/breakable_wall.o $(BUILD_DIR)/non_breakable_wall.o $(BUILD_DIR)/grass.o $(BUILD_DIR)/door.o
+	$(CC) $(BUILD_DIR)/main.o $(BUILD_DIR)/game.o $(BUILD_DIR)/map.o $(BUILD_DIR)/player.o $(BUILD_DIR)/wall.o $(BUILD_DIR)/map_element.o $(BUILD_DIR)/breakable_wall.o $(BUILD_DIR)/non_breakable_wall.o $(BUILD_DIR)/grass.o -o $(TARGET) $(SFML_FLAGS) $(BUILD_DIR)/door.o;
 
 clean:
 	rm -f *.o;

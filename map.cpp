@@ -3,6 +3,7 @@
 #include "headers/grass.hpp"
 #include "headers/breakable_wall.hpp"
 #include "headers/non_breakable_wall.hpp"
+#include "headers/door.hpp"
 
 Map::Map(sf::RenderWindow *renderWindow, sf::Event _event) : window(renderWindow), event(_event) {
     this->grass = this->createGrass();
@@ -58,9 +59,9 @@ MapElement *Map::createElement(MapObject element, int xPos, int yPos) {
             sprite.setTexture(this->wall2);
             return new NonBreakableWall(sf::Vector2f(static_cast<float>(xPos), static_cast<float>(yPos)), sprite);
         }
-        case Door: {
+        case DoorTexture: {
             sprite.setTexture(this->door);
-            return new BreakableWall(sf::Vector2f(static_cast<float>(xPos), static_cast<float>(yPos)), sprite);
+            return new Door(sf::Vector2f(static_cast<float>(xPos), static_cast<float>(yPos)), sprite);
         }
         default:
             throw std::runtime_error("Unknown element given to be created\n");
@@ -108,7 +109,7 @@ MapObject Map::mapObjectFactory(char item) {
     } else if (item == 'P') {
         return MapObject::Wall2;
     } else if (item == 'D') {
-        return MapObject::Door;
+        return MapObject::DoorTexture;
     } else {
         throw std::logic_error("Invalid Map operator in txt file detected!\n");
     }
