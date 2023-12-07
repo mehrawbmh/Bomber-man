@@ -6,6 +6,10 @@
 #include <string>
 #include <iostream>
 #include "map_element.hpp"
+#include "door.hpp"
+#include "key.hpp"
+#include "wall.hpp"
+#include "grass.hpp"
 
 enum MapObject {
     Wall1, Wall2, DoorTexture, GrassTexture, EnemyH, EnemyV
@@ -29,6 +33,10 @@ private:
     const int AVAILABLE_KEYS = 3;
 
     std::vector<MapElement*> mapElements;
+    std::vector<Wall*> walls;
+    std::vector<Door*> doors;
+    std::vector<Key*> keys;
+    std::vector<Grass*> grasses; //todo?
 
     int rows;
     int columns;
@@ -42,7 +50,7 @@ private:
     sf::Texture key1;
     sf::Texture key2;
     sf::Texture key3;
-    std::vector<sf::Texture> keys;
+    std::vector<sf::Texture> keyTextures;
 
     MapElement *createElement(MapObject element, int x, int y);
 
