@@ -127,7 +127,7 @@ void Map::init(const std::vector<std::vector<MapObject>> &mapObjects) {
     this->rows = static_cast<int>(mapObjects.size());
     this->columns = static_cast<int>(mapObjects[0].size());
     int x, y = 0;
-
+    std::vector<Enemy*> enemies;
     for (const auto &elements: mapObjects) {
         x = 0;
         for (const auto &element: elements) {

@@ -10,6 +10,7 @@
 #include "key.hpp"
 #include "wall.hpp"
 #include "grass.hpp"
+#include "enemy.hpp"
 
 enum MapObject {
     Wall1, Wall2, DoorTexture, GrassTexture, EnemyH, EnemyV

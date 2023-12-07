@@ -31,7 +31,7 @@ public:
     void savePreviousLocation();
     int updateWindowBoundsCollision(const sf::RenderTarget *target);
     void undoMovement();
-    void updateCollision( std::vector<MapElement*> elements);
+    int updateCollision( std::vector<MapElement*> elements);
     void render(sf::RenderTarget *target);
 };
 

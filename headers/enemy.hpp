@@ -17,8 +17,8 @@ private:
     void initInitialDirection();
     void initTexture();
 public:
-    Enemy(float x,float y, float previous_x,float previous_y);
-    void update(const sf::RenderTarget* target);
+    Enemy(float x,float y, float previous_x,float previous_y,EnemyTypes _type);
+    void update(const sf::RenderTarget* target,std::vector<MapElement*> elements);
     void updatePosition();
 };
 
