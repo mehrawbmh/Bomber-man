@@ -13,6 +13,7 @@ public:
     int type;
     virtual void draw(sf::RenderTarget *window) = 0;
     const sf::Sprite getSprite() const;
+    sf::Vector2f getPosition() const;
 
 protected:
     sf::Vector2f position;
