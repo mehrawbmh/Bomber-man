@@ -46,7 +46,8 @@ void Person::savePreviousLocation()
 	this->previous_x=this->sprite.getGlobalBounds().left;
 	this->previous_y=this->sprite.getGlobalBounds().top;
 }
-void Person::updateCollision(std::vector<MapElement*> elements) {
+int Person::updateCollision(std::vector<MapElement*> elements) {
+	int collision_happened=0;
     for(size_t i=0; i< elements.size();i++ ){
         sf::Sprite playerScaledSprite = this->getSprite();
         sf::Sprite elementScaledSprite = elements[i]->getSprite();
@@ -58,13 +59,16 @@ void Person::updateCollision(std::vector<MapElement*> elements) {
             {
             case MapElementTypes::UNBREAKABLE_WALL:
                 this->undoMovement();
+				collision_happened=1;
                 break;
             case MapElementTypes::BREAKABLE_WALL:
                 this->undoMovement();
+				collision_happened=1;
                 break;
             default:
                 break;
             }
         }
     }
+	return collision_happened;
 }

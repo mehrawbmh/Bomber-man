@@ -119,7 +119,8 @@ MapElement *Map::createElement(MapObject element, int xPos, int yPos) {
             return new Door(sf::Vector2f(static_cast<float>(xPos), static_cast<float>(yPos)), sprite);
         }
         default:
-            throw std::runtime_error("Unknown element given to be created\n");
+            sprite.setTexture(this->grass);
+            return new Grass(sf::Vector2f(static_cast<float>(xPos), static_cast<float>(yPos)), sprite);
     }
 }
 
@@ -127,7 +128,7 @@ void Map::init(const std::vector<std::vector<MapObject>> &mapObjects) {
     this->rows = static_cast<int>(mapObjects.size());
     this->columns = static_cast<int>(mapObjects[0].size());
     int x, y = 0;
-
+    std::vector<Enemy*> enemies;
     for (const auto &elements: mapObjects) {
         x = 0;
         for (const auto &element: elements) {

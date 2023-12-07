@@ -94,6 +94,7 @@ void Game::updatePlayer() {
 void Game::update() {
     this->window->clear(sf::Color::Black);
     this->updatePlayer();
+    this->updateEnemies();
     this->updateTimer();
     this->map->update();
 }
@@ -128,6 +129,7 @@ void Game::readMap() {
 
     file.close();
     this->map->init(rows);
+    this->initEnemies(rows);
     std::cout << "Map is in size of " << this->map->getMapSize().x << " * " << this->map->getMapSize().y << std::endl;
 }
 
@@ -146,7 +148,37 @@ sf::Time Game::readGameTime(const std::string &timeString) {
 
 void Game::render() {
     this->player->render(this->window);
+    this->renderEnemies();
     this->window->display();
+
+}
+void Game::initEnemies(const std::vector<std::vector<MapObject>> &mapObjects)
+{
+    float x,y;
+    for (const auto &elements: mapObjects) {
+        x = 0;
+        for (const auto &element: elements) {
+            if(element==MapObject::EnemyH){
+                this->enemies.push_back(new Enemy(x,y,x,y,EnemyTypes::HORIZONtAL));
+            }
+            else if(element==MapObject::EnemyV){
+                this->enemies.push_back(new Enemy(x,y,x,y,EnemyTypes::VERTICAL));
+            }
+            x += ELEMENT_SIZE_X;
+        }
+        y += ELEMENT_SIZE_Y;
+    }
 }
 
 
+void Game::updateEnemies()
+{
+    for(auto &enemy: this->enemies){
+        enemy->update(this->window,this->map->giveMapElements());
+    }
+}
+void Game::renderEnemies(){
+    for (auto enemy:this->enemies){
+        enemy->render(this->window);
+    }
+}

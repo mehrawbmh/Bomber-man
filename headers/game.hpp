@@ -3,6 +3,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "player.hpp"
+#include "enemy.hpp"
 #include "map.hpp"
 
 const std::string GAME_TITLE = "Bomber-man";
@@ -22,6 +23,7 @@ private:
 
     Player *player;
     Map *map;
+    std::vector<Enemy*> enemies;
 
     void handleEvents();
 
@@ -44,11 +46,13 @@ public:
     void run();
     void render();
 
+    void initEnemies(const std::vector<std::vector<MapObject>> &objects);
     void initTimer();
-    
     bool isFinished();
+    void updateEnemies();
 
     static int getRandomNumber(int startRange, int endRange);
+    void renderEnemies();
 };
 
 

@@ -1,7 +1,8 @@
 #include "headers/enemy.hpp"
 
-Enemy::Enemy(float x,float y, float previous_x,float previous_y):Person(x,y,x,y)
+Enemy::Enemy(float x,float y, float previous_x,float previous_y,EnemyTypes _type) : Person(x,y,x,y)
 {
+    this->type=_type;
     this->initTexture();
     this->initInitialDirection();
     if(this->initialDir==InitialDirectionTypes::UP_LEFT){
@@ -22,10 +23,10 @@ void Enemy::initTexture()
 		std::cout << "Failed to load enemy left texture\n";
 	}
 }
-void Enemy::update(const sf::RenderTarget* target)
+void Enemy::update(const sf::RenderTarget* target,std::vector<MapElement*> elements)
 {
     this->updatePosition();
-    if(updateWindowBoundsCollision(target)){
+    if(this->updateWindowBoundsCollision(target)||this->updateCollision(elements)){
         this->movementSpeed=-this->movementSpeed;
     }
 }
