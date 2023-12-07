@@ -1,11 +1,9 @@
 #include "headers/player.hpp"
 
-Player::Player(float x, float y): previous_y(y), previous_x(x)
+Player::Player(float x, float y): Person(x,y,x,y)
 {
-	this->sprite.setPosition(x, y);
     this->initTexture();
 	this->sprite.setTexture(this->downwards_texture);
-    this->movementSpeed = 3.f;
 }
 
 void Player::initTexture()
@@ -53,20 +51,7 @@ void Player::updatePosition()
 	}
 }
 
-void Player::updateWindowBoundsCollision(const sf::RenderTarget * target)
-{
-	if (this->sprite.getGlobalBounds().left <= 0.f)
-		this->sprite.setPosition(0.f, this->sprite.getGlobalBounds().top);
 
-	if (this->sprite.getGlobalBounds().left + this->sprite.getGlobalBounds().width >= target->getSize().x)
-		this->sprite.setPosition(target->getSize().x - this->sprite.getGlobalBounds().width, this->sprite.getGlobalBounds().top);
-
-	if (this->sprite.getGlobalBounds().top <= 0.f)
-		this->sprite.setPosition(this->sprite.getGlobalBounds().left, 0.f);
-
-	if (this->sprite.getGlobalBounds().top + this->sprite.getGlobalBounds().height >= target->getSize().y)
-		this->sprite.setPosition(this->sprite.getGlobalBounds().left, target->getSize().y - this->sprite.getGlobalBounds().height);
-}
 
 void Player::update(const sf::RenderTarget* target)
 {
@@ -74,20 +59,5 @@ void Player::update(const sf::RenderTarget* target)
 	this->updateWindowBoundsCollision(target);
 }
 
-void Player::render(sf::RenderTarget * target)
-{
-	target->draw(this->sprite);
-}
-void Player::savePreviousLocation()
-{
-	this->previous_x=this->sprite.getGlobalBounds().left;
-	this->previous_y=this->sprite.getGlobalBounds().top;
-}
- const sf::Sprite Player::getSprite() const
-{
-	return this->sprite;
-}
-void Player::undoMovement()
-{
-	this->sprite.setPosition(previous_x,previous_y);
-}
+
+
