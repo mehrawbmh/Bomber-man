@@ -15,7 +15,7 @@ Map::Map(sf::RenderWindow *renderWindow, sf::Event _event) : window(renderWindow
     this->key1 = this->createKey(1);
     this->key2 = this->createKey(2);
     this->key3 = this->createKey(3);
-    this->keys = {key1, key2, key3};
+    this->keyTextures = {key1, key2, key3};
 }
 
 Map::~Map() = default;
@@ -79,17 +79,20 @@ sf::Texture Map::createDoor() {
 void Map::placeKeysUnderWalls() {
     RandomNumberGenerator generator(0, this->mapElements.size() - 1);
     int count = 0;
+
     while (count < AVAILABLE_KEYS) {
         int rand = generator.generateRandomNumber();
         if (dynamic_cast<BreakableWall*>(this->mapElements[rand])) {
             sf::Sprite sprite;
             sf::Vector2f position = this->mapElements[rand]->getPosition();
+
             sprite.setPosition(position);
-            sprite.setTexture(this->keys[count]);
+            sprite.setTexture(this->keyTextures[count]);
             sprite.setColor(sf::Color::White);
             sprite.setScale(0.85f, 0.95f);
+
             this->mapElements.push_back(new Key(position, sprite));
-            std::cout << "placed a key under sprite of " << position.x << ':' << position.y << std::endl;
+            std::cout << "placed a key under sprite of column " << position.x / ELEMENT_SIZE_X << " : row " << position.y / ELEMENT_SIZE_Y << std::endl;
             count++;
         }
     }
@@ -142,12 +145,41 @@ sf::Vector2f Map::getMapSize() const {
 }
 
 void Map::update() {
+    this->walls.clear();
+    this->doors.clear();
+    this->grasses.clear();
+    this->keys.clear();
+    for(int i = 0; i < this->mapElements.size(); i++) {
+        MapElement* element = this->mapElements[i];
+        if (dynamic_cast<Wall*>(element)) {
+            this->walls.push_back(dynamic_cast<Wall*>(element));
+        } else if (dynamic_cast<Door*>(element)) {
+            this->doors.push_back(dynamic_cast<Door*>(element));
+        } else if (dynamic_cast<Key*>(element)) {
+            this->keys.push_back(dynamic_cast<Key*>(element));
+        } else if (dynamic_cast<Grass*>(element)) {
+            this->grasses.push_back(dynamic_cast<Grass*>(element));
+        }
+    }
     this->draw();
 }
 
 void Map::draw() {
-    for (auto &mapElement: this->mapElements) {
-        mapElement->draw(this->window);
+    // for (auto &mapElement: this->mapElements) {
+    //     mapElement->draw(this->window);
+    // }
+
+    for (auto &grass: this->grasses) {
+        grass->draw(this->window);
+    }
+    for (auto &key: this->keys) {
+        key->draw(this->window);
+    }
+    for (auto &door: this->doors) {
+        door->draw(this->window);
+    }
+    for (auto &wall: this->walls) {
+        wall->draw(this->window);
     }
 }
 
