@@ -12,6 +12,7 @@
 #include "grass.hpp"
 #include "enemy.hpp"
 #include "bomb.hpp"
+#include "enemy.hpp"
 
 enum MapObject {
     Wall1, Wall2, DoorTexture, GrassTexture, EnemyH, EnemyV
@@ -64,7 +65,7 @@ private:
 
     sf::Texture createDoor();
 
-    void updateBombs();
+    void updateBombs(const std::vector<Enemy*>& enemies);
 
     void placeKeysUnderWalls();
 
@@ -87,7 +88,7 @@ public:
 
     sf::Vector2f getMapSize() const;
 
-    void update();
+    void update(std::vector<Enemy*>);
 };
 
 #endif
