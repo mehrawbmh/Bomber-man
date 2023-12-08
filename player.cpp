@@ -8,16 +8,16 @@ Player::Player(float x, float y): Person(x,y,x,y)
 
 void Player::initTexture()
 {
-	if(!this->upwards_texture.loadFromFile("sprites/boy/up.png")){
+	if(!this->upwards_texture.loadFromFile(this->UP_TEXTURE_FILE)){
 		std::cout << "Failed to load up texture\n";
 	}
-	if(!this->downwards_texture.loadFromFile("sprites/boy/down-stay.png")){
+	if(!this->downwards_texture.loadFromFile(this->dOWN_TEXTURE_FILE)){
 		std::cout << "Failed to load down texture\n";
 	}
-	if(!this->right_texture.loadFromFile("sprites/boy/right.png")){
+	if(!this->right_texture.loadFromFile(this->RIGHT_TEXTURE_FILE)){
 		std::cout << "Failed to load right texture\n";
 	}
-	if(!this->left_texture.loadFromFile("sprites/boy/left.png")){
+	if(!this->left_texture.loadFromFile(this->LEFT_TEXTURE_FILE)){
 		std::cout << "Failed to load left texture\n";
 	}
 }

@@ -11,15 +11,15 @@ Enemy::Enemy(float x,float y, float previous_x,float previous_y,EnemyTypes _type
 }
 void Enemy::initTexture()
 {
-    if(!this->upwards_texture.loadFromFile(UP_TEXTURE_FILE)){
+    if(!this->upwards_texture.loadFromFile(this->UP_TEXTURE_FILE)){
 		std::cout << "Failed to load enemy up texture\n";
-    }if(!this->downwards_texture.loadFromFile(dOWN_TEXTURE_FILE)){
+    }if(!this->downwards_texture.loadFromFile(this->dOWN_TEXTURE_FILE)){
 		std::cout << "Failed to load enemy down texture\n";
 	}
-	if(!this->right_texture.loadFromFile(RIGHT_TEXTURE_FILE)){
+	if(!this->right_texture.loadFromFile(this->RIGHT_TEXTURE_FILE)){
 		std::cout << "Failed to load enemy right texture\n";
 	}
-	if(!this->left_texture.loadFromFile(LEFT_TEXTURE_FILE)){
+	if(!this->left_texture.loadFromFile(this->LEFT_TEXTURE_FILE)){
 		std::cout << "Failed to load enemy left texture\n";
 	}
 }

@@ -7,6 +7,12 @@
 
 class Player : public Person {
 private:
+
+    const std::string UP_TEXTURE_FILE = "sprites/boy/up.png";
+    const std::string dOWN_TEXTURE_FILE = "sprites/boy/down-stay.png";
+    const std::string LEFT_TEXTURE_FILE = "sprites/boy/left.png";
+    const std::string RIGHT_TEXTURE_FILE = "sprites/boy/right.png";
+
     int hp = DEFAULT_HP;
     void initTexture();
 
