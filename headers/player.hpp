@@ -32,6 +32,8 @@ public:
 
     void reduceHp();
 
+    void increaseHp();
+
     int getHp() const;
 
     int getFoundKeys() const;
@@ -43,6 +45,8 @@ public:
     void setDoorFound(bool hasFound);
 
     void render(sf::RenderTarget *target) override;
+
+    void doubleMovementSpeed();
 };
 
 #endif

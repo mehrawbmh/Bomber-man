@@ -29,7 +29,17 @@ void PowerUp::initSetTexture()
     this->sprite.setTexture(this->texture);
 }
 
-void PowerUp::draw(sf::RenderTarget *target) {
-    this->sprite.setPosition(this->position);
-    target->draw(this->sprite);
+void PowerUp::draw(sf::RenderTarget *target){
+    if (!this->getIsConsumed()) {
+        this->sprite.setPosition(this->position);
+        target->draw(this->sprite);
+    }
+}
+
+bool PowerUp::getIsConsumed() {
+    return this->isConsumed;
+}
+
+void PowerUp::setIsConsumed(bool consumed) {
+    this->isConsumed = consumed;
 }

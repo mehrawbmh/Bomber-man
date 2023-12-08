@@ -14,9 +14,15 @@ public:
 
     PowerUp(PowerUpsTypes _type, sf::Vector2f position);
 
+    bool getIsConsumed();
+
+    void setIsConsumed(bool consumed);
+
 private:
     const std::string SYRINGE_FILE = "sprites/syringe.png";
     const std::string SPEED_BOOSTER_FILE = "sprites/speed_booster.png";
+
+    bool isConsumed = false;
 
     sf::Texture texture;
 

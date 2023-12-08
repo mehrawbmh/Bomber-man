@@ -106,3 +106,14 @@ void Player::setDoorFound(bool hasFound) {
 void Player::render(sf::RenderTarget *target) {
     target->draw(this->sprite);
 }
+
+void Player::doubleMovementSpeed() {
+    this->movementSpeed *= 2;
+}
+
+void Player::increaseHp() {
+    this->hp += 1;
+    if (this->hp >= Player::MAX_HP) {
+        this->hp = Player::MAX_HP;
+    }
+}

@@ -23,7 +23,7 @@ $(BUILD_DIR)/main.o: main.cpp
 $(BUILD_DIR)/game.o: $(HEADERS_DIR)/game.hpp $(HEADERS_DIR)/map.hpp $(HEADERS_DIR)/player.hpp ./game.cpp $(HEADERS_DIR)/person.hpp  ./person.cpp $(HEADERS_DIR)/enemy.hpp  ./enemy.cpp
 	$(CC) -c game.cpp $(SFML_FLAGS) -o $(BUILD_DIR)/game.o;
 
-$(BUILD_DIR)/map.o: $(HEADERS_DIR)/map.hpp ./map.cpp $(BUILD_DIR)/grass.o $(BUILD_DIR)/non_breakable_wall.o $(BUILD_DIR)/breakable_wall.o $(BUILD_DIR)/door.o $(BUILD_DIR)/key.o $(BUILD_DIR)/bomb.o
+$(BUILD_DIR)/map.o: $(HEADERS_DIR)/map.hpp ./map.cpp $(BUILD_DIR)/grass.o $(BUILD_DIR)/non_breakable_wall.o $(BUILD_DIR)/breakable_wall.o $(BUILD_DIR)/door.o $(BUILD_DIR)/key.o $(BUILD_DIR)/bomb.o $(BUILD_DIR)/powerUp.o
 	$(CC) -c map.cpp $(SFML_FLAGS) -o $(BUILD_DIR)/map.o;
 
 $(BUILD_DIR)/player.o: $(HEADERS_DIR)/player.hpp $(HEADERS_DIR)/person.hpp ./player.cpp  ./person.cpp
