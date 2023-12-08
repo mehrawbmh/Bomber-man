@@ -39,6 +39,8 @@ public:
     bool hasFoundTheDoor() const;
 
     void setDoorFound(bool hasFound);
+
+    void render(sf::RenderTarget *target) override;
 };
 
 #endif
