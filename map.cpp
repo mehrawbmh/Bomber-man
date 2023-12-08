@@ -27,7 +27,7 @@ Map::~Map() = default;
 sf::Texture Map::createGrass() {
     sf::Texture grassTexture;
     if (grassTexture.loadFromFile(BASE_SPRITES_DIR + "/" + GRASS_FILE)) {
-        grassTexture.setSmooth(true); //TODO?
+        grassTexture.setSmooth(true);
     }
 
     return grassTexture;
@@ -186,8 +186,7 @@ void Map::update(const std::vector<Enemy *> &enemies) {
     this->keys.clear();
     this->powerUps.clear();
 
-    for (int i = 0; i < this->mapElements.size(); i++) {
-        MapElement *element = this->mapElements[i];
+    for (auto element : this->mapElements) {
         if (dynamic_cast<Wall*>(element)) {
             this->walls.push_back(dynamic_cast<Wall*>(element));
         } else if (dynamic_cast<Door *>(element)) {

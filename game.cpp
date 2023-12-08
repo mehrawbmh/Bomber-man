@@ -137,7 +137,7 @@ void Game::update() {
     }
 
     this->window->clear(sf::Color::Black);
-    this->playerEnemyCollision();
+    this->handlePlayerEnemyCollision();
     this->updatePlayer();
     this->updateEnemies();
     this->updateTimer();
@@ -207,8 +207,8 @@ void Game::render() {
     this->player->render(this->window);
     this->renderEnemies();
     this->window->display();
-
 }
+
 void Game::initEnemies(const std::vector<std::vector<MapObject>> &mapObjects)
 {
     float x,y;
@@ -227,7 +227,6 @@ void Game::initEnemies(const std::vector<std::vector<MapObject>> &mapObjects)
     }
 }
 
-
 void Game::updateEnemies()
 {
     for(auto &enemy: this->enemies){
@@ -241,10 +240,9 @@ void Game::renderEnemies(){
     }
 }
 
-void Game::playerEnemyCollision()
-{
-    if(!this->isPlayerInvincible()){
-        for(auto enemy:this->enemies){
+void Game::handlePlayerEnemyCollision() {
+    if(!this->isPlayerInvincible()) {
+        for(auto enemy:this->enemies) {
             if (enemy->isDestroyed()) continue;
             sf::Sprite playerSprite = this->player->getSprite();
             playerSprite.setScale(0.75, 0.75);

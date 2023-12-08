@@ -6,8 +6,8 @@ Door::Door(const sf::Vector2f &position, sf::Sprite _sprite): MapElement(positio
 
 void Door::draw(sf::RenderTarget *window) {
     if (hasBeenEntered()) {
-        this->sprite.setRotation(5.f);
-        this->sprite.move(1.f, 1.f);
+        this->sprite.setRotation(this->FINAL_ROTATION_ANIMATION_ANGLE);
+        this->sprite.move(this->FINAL_MOVEMENT_ANIMATION_MAGNITUDE, this->FINAL_MOVEMENT_ANIMATION_MAGNITUDE);
     }
     this->sprite.setPosition(this->position);
     window->draw(this->sprite);

@@ -6,7 +6,6 @@ Person::Person(float x,float y,float previous_x,float previous_y)
 {
     this->sprite.setPosition(x, y);
     this->movementSpeed = 3.f;
-
 }
 
 int Person::updateWindowBoundsCollision(const sf::RenderTarget * target)

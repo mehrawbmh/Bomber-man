@@ -9,6 +9,7 @@ Enemy::Enemy(float x,float y, float previous_x,float previous_y,EnemyTypes _type
         this->movementSpeed=-this->movementSpeed;
     }
 }
+
 void Enemy::initTexture()
 {
     if(!this->upwards_texture.loadFromFile(this->UP_TEXTURE_FILE)){
@@ -23,6 +24,7 @@ void Enemy::initTexture()
 		std::cout << "Failed to load enemy left texture\n";
 	}
 }
+
 void Enemy::update(const sf::RenderTarget* target,std::vector<MapElement*> elements)
 {
     this->updatePosition();
@@ -30,6 +32,7 @@ void Enemy::update(const sf::RenderTarget* target,std::vector<MapElement*> eleme
         this->movementSpeed=-this->movementSpeed;
     }
 }
+
 void Enemy::initInitialDirection()
 {
     RandomNumberGenerator rand(0,1);

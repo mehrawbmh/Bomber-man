@@ -14,4 +14,4 @@ const sf::Sprite MapElement::getSprite() const
 
 sf::Vector2f MapElement::getPosition() const {
     return this->position;
-};
+}
