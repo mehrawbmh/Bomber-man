@@ -63,6 +63,8 @@ private:
 
     void handlePlayerKeyCollision();
 
+    void handlePlayerDoorCollision();
+
     bool isPlayerDead();
 
     bool isPlayerInvincible() const;

@@ -92,6 +92,8 @@ public:
     std::vector<Key*> getKeys() const;
     void Map::placePowerUpsUnderWalls();
 
+    std::vector<Door*> getDoors() const;
+
     void update(const std::vector<Enemy*>&);
 };
 
