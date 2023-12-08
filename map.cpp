@@ -218,6 +218,9 @@ void Map::draw() {
     for (auto &_bomb: this->bombs) {
         _bomb->draw(this->window);
     }
+    for (auto &_power: this->powerUps) {
+        _power->draw(this->window);
+    }
 }
 
 MapObject Map::mapObjectFactory(char item) {
