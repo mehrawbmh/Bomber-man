@@ -16,17 +16,17 @@ private:
     long plantTime;
 
 public:
-    Bomb(const sf::Vector2f &position, std::string textureFilePath);
+    Bomb(const sf::Vector2f &position, const std::string &textureFilePath);
 
     void draw(sf::RenderTarget *window) override;
 
-    bool shouldDestroy(sf::Vector2f objectPosition);
+    bool shouldDestroy(sf::Vector2f objectPosition) const;
 
-    bool isTimeToExplode();
+    bool isTimeToExplode() const;
 
     void explode();
 
-    bool isExploded();
+    bool isExploded() const;
 };
 
 #endif

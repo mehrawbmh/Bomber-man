@@ -3,8 +3,6 @@
 
 #include "person.hpp"
 
-
-
 class Player : public Person {
 private:
 
@@ -15,6 +13,8 @@ private:
 
     int hp = DEFAULT_HP;
     void initTexture();
+    void updatePosition();
+    void updateBomb();
 
 public:
     static const int MAX_HP = 3;
@@ -24,13 +24,13 @@ public:
 
     Player(float x = 0.f, float y = 0.f);
 
-    void updatePosition();
-    void updateBomb();
+    void update(const sf::RenderTarget *target,std::vector<MapElement*> elements);
+
     bool isThrownBomb() const;
 
     void reduceHp();
-    void update(const sf::RenderTarget *target,std::vector<MapElement*> elements);
-    int getHp();
+
+    int getHp() const;
 };
 
 #endif

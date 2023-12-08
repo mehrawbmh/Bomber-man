@@ -9,7 +9,11 @@
 const std::string GAME_TITLE = "Bomber-man";
 const std::string MAP_INIT_FILE = "map.txt";
 const std::string DEFAULT_FONT_FILE = "fonts/arial.ttf";
-const int INVINCIBLE_DURATION = 1;
+const std::string SECONDARY_FONT_FILE = "fonts/calibri.ttf";
+
+const int GAME_FPS = 100;
+const int INVINCIBLE_DURATION = 2;
+
 class Game {
 private:
     bool finished = false;
@@ -19,7 +23,9 @@ private:
     sf::Event event{};
     sf::Clock clock{};
     sf::Text timer{};
+    sf::Text stats{};
     sf::Font font{};
+    sf::Font secondaryFont{};
     sf::Time gameTime;
 
     Player *player;
@@ -33,7 +39,36 @@ private:
     void updateTimer();
 
     void readMap();
+
     static sf::Time readGameTime(const std::string &timeString);
+
+    void initEnemies(const std::vector<std::vector<MapObject>> &objects);
+
+    void initTimer();
+
+    void initFonts();
+
+    void initStats();
+
+    bool isFinished() const;
+
+    void updateEnemies();
+
+    void renderEnemies();
+
+    void playerEnemyCollision();
+
+    bool isPlayerDead();
+
+    bool isPlayerInvincible() const;
+
+    void updatePlayer();
+
+    void updateStats();
+
+    void updateMap();
+
+    void render();
 
 public:
     Game();
@@ -41,24 +76,10 @@ public:
     ~Game();
 
     void start();
-    void updatePlayer();
-    void updateMap();
+
     bool isClosed();
 
     void run();
-    void render();
-
-    void initEnemies(const std::vector<std::vector<MapObject>> &objects);
-    void initTimer();
-    bool isFinished() const;
-    void updateEnemies();
-
-    static int getRandomNumber(int startRange, int endRange);
-    void renderEnemies();
-    void playerEnemyCollision();
-    bool isPlayerDead();
-    bool isPlayerInvincible();
 };
-
 
 #endif

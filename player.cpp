@@ -66,8 +66,6 @@ void Player::updatePosition()
 	}
 }
 
-
-
 void Player::update(const sf::RenderTarget* target,std::vector<MapElement*> elements)
 {
     this->updateBomb();
@@ -84,7 +82,7 @@ void Player::reduceHp()
 	}
 }
 
-int Player::getHp()
+int Player::getHp() const
 {
 	return this->hp;
 }
