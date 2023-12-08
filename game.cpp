@@ -12,6 +12,7 @@ Game::Game() {
     this->font.loadFromFile(DEFAULT_FONT_FILE);
     this->map = new Map(this->window, this->event);
     this->player = new Player(0.f, 0.f);
+    this->lastHitTime=0;
 }
 
 Game::~Game() {
@@ -101,11 +102,15 @@ void Game::updateMap() {
 }
 
 void Game::update() {
+    if(!this->isFinished() && !this->isPlayerDead())
+    {
     this->window->clear(sf::Color::Black);
+    this->playerEnemyCollision();
     this->updatePlayer();
     this->updateEnemies();
     this->updateTimer();
     this->updateMap();
+    }
 }
 
 void Game::updateTimer() {
@@ -189,5 +194,34 @@ void Game::updateEnemies()
 void Game::renderEnemies(){
     for (auto enemy:this->enemies){
         enemy->render(this->window);
+    }
+}
+void Game::playerEnemyCollision()
+{
+    if(!this->isPlayerInvincible()){
+        for(auto enemy:this->enemies){
+            if(this->player->getSprite().getGlobalBounds().intersects(enemy->getSprite().getGlobalBounds())){
+                this->player->reduceHp();
+                this->lastHitTime=std::time(nullptr);
+            }
+        }
+    }
+}
+bool Game::isPlayerDead()
+{
+    if(this->player->getHp()==0){
+        return true;
+        std::cout<<"you dead\n";
+    }else{
+        return false;
+    }
+}
+bool Game::isPlayerInvincible()
+{
+    if(std::time(nullptr)<this->lastHitTime+INVINCIBLE_DURATION && this->lastHitTime!=0)
+    {
+        return true;
+    }else {
+        return false;
     }
 }

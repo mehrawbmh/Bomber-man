@@ -9,10 +9,11 @@
 const std::string GAME_TITLE = "Bomber-man";
 const std::string MAP_INIT_FILE = "map.txt";
 const std::string DEFAULT_FONT_FILE = "fonts/arial.ttf";
-
+const int INVINCIBLE_DURATION = 1;
 class Game {
 private:
     bool finished = false;
+    long lastHitTime;
 
     sf::RenderWindow *window;
     sf::Event event{};
@@ -54,6 +55,9 @@ public:
 
     static int getRandomNumber(int startRange, int endRange);
     void renderEnemies();
+    void playerEnemyCollision();
+    bool isPlayerDead();
+    bool isPlayerInvincible();
 };
 
 
