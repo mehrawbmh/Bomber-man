@@ -3,8 +3,6 @@
 
 #include "person.hpp"
 
-
-
 class Player : public Person {
 private:
     int hp = DEFAULT_HP;
@@ -24,7 +22,7 @@ public:
 
     void reduceHp();
     void update(const sf::RenderTarget *target,std::vector<MapElement*> elements);
-    int getHp();
+    int getHp() const;
 };
 
 #endif

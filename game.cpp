@@ -8,8 +8,8 @@
 #include "headers/breakable_wall.hpp"
 
 Game::Game() {
+    this->initFonts();
     this->window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), GAME_TITLE);
-    this->font.loadFromFile(DEFAULT_FONT_FILE);
     this->map = new Map(this->window, this->event);
     this->player = new Player(0.f, 0.f);
     this->lastHitTime=0;
@@ -21,24 +21,13 @@ Game::~Game() {
     delete this->player;
 }
 
-int Game::getRandomNumber(int startRange, int endRange) {
-    /* Generates a random int number. start and end number also included in result. */
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> dis(startRange, endRange);
-
-    return dis(gen);
-}
-
 void Game::start() {
     this->window->setFramerateLimit(100); //TODO: change it?
     this->window->clear(sf::Color::Black);
     this->initTimer();
+    this->initStats();
 
-    std::cout << "Loading map...\n";
     this->readMap();
-    std::cout << "Loading of map finished\n";
-
     this->window->display();
     std::cout << "Game is starting...\n";
 }
@@ -49,13 +38,19 @@ void Game::run() {
     this->render();
 }
 
+void Game::initFonts() {
+    this->font.loadFromFile(DEFAULT_FONT_FILE);
+    this->secondaryFont.loadFromFile(SECONDARY_FONT_FILE);
+}
+
 void Game::initTimer() {
     std::cout << "Loading timer...\n";
     this->clock.restart();
     this->timer.setFillColor(sf::Color::White);
     this->timer.setCharacterSize(24);
     this->timer.setOutlineColor(sf::Color::Red);
-    this->timer.setPosition(static_cast<float>(this->window->getSize().x - 150), 0.f);
+    this->timer.setOutlineThickness(1.5f);
+    this->timer.setPosition(static_cast<float>(this->window->getSize().x - 200), 0.f);
     this->timer.setFont(this->font);
     std::cout << "Loading of timer finished\n";
 }
@@ -72,7 +67,7 @@ void Game::handleEvents() {
                 if (event.key.code == sf::Keyboard::Escape) {
                     std::cout << "Escape has pressed. exiting...\n";
                     this->finished = true;
-                    this->window->close(); //todo: close with escape?
+                    this->window->close();
                 }
                 break;
             default:
@@ -97,29 +92,51 @@ void Game::updatePlayer() {
     }
 }
 
+void Game::updateStats() {
+    std::stringstream ss;
+    ss << "HP: " << this->player->getHp() << std::endl;
+    this->stats.setString(ss.str());
+    this->window->draw(this->stats);
+}
+
+void Game::initStats() {
+    std::cout << "Loading stats...\n";
+    this->stats.setFillColor(sf::Color::Cyan);
+    this->stats.setCharacterSize(28);
+    this->stats.setPosition(static_cast<float>(this->window->getSize().x - 200), 100.f);
+    this->stats.setFont(this->secondaryFont);
+}
+
 void Game::updateMap() {
     this->map->update();
 }
 
 void Game::update() {
-    if(!this->isFinished() && !this->isPlayerDead())
-    {
+    if (this->isFinished() || this->isPlayerDead()) {
+        return;
+    }
+
     this->window->clear(sf::Color::Black);
     this->playerEnemyCollision();
     this->updatePlayer();
     this->updateEnemies();
     this->updateTimer();
+    this->updateStats();
     this->updateMap();
-    }
 }
 
 void Game::updateTimer() {
     float output = this->gameTime.asSeconds() - this->clock.getElapsedTime().asSeconds();
     std::stringstream stream;
-    stream << "Timer: " << static_cast<int>(output / 60) << ": " << static_cast<int>(static_cast<int>(output) % 60);
+    output = std::max(output, 0.f);
 
+    stream << "Timer\t\t" << static_cast<int>(output / 60) << " : " << static_cast<int>(static_cast<int>(output) % 60);
     this->timer.setString(stream.str());
     this->window->draw(this->timer);
+
+    if (output <= 0.f) {
+        this->finished = true;
+    }
 }
 
 void Game::readMap() {
@@ -191,11 +208,13 @@ void Game::updateEnemies()
         enemy->update(this->window,this->map->giveMapElements());
     }
 }
+
 void Game::renderEnemies(){
     for (auto enemy:this->enemies){
         enemy->render(this->window);
     }
 }
+
 void Game::playerEnemyCollision()
 {
     if(!this->isPlayerInvincible()){
@@ -207,21 +226,13 @@ void Game::playerEnemyCollision()
         }
     }
 }
+
 bool Game::isPlayerDead()
 {
-    if(this->player->getHp()==0){
-        return true;
-        std::cout<<"you dead\n";
-    }else{
-        return false;
-    }
+    return this->player->getHp() <= 0;
 }
-bool Game::isPlayerInvincible()
+
+bool Game::isPlayerInvincible() const
 {
-    if(std::time(nullptr)<this->lastHitTime+INVINCIBLE_DURATION && this->lastHitTime!=0)
-    {
-        return true;
-    }else {
-        return false;
-    }
+    return (std::time(nullptr) < this->lastHitTime + INVINCIBLE_DURATION) && (this->lastHitTime != 0);
 }
