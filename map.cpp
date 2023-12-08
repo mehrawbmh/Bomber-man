@@ -17,6 +17,8 @@ Map::Map(sf::RenderWindow *renderWindow, sf::Event _event) : window(renderWindow
     this->key2 = this->createKey(2);
     this->key3 = this->createKey(3);
     this->keyTextures = {key1, key2, key3};
+    this->rows = 0;
+    this->columns = 0;
 }
 
 Map::~Map() = default;
@@ -84,13 +86,13 @@ Bomb* Map::plantBomb(const sf::Vector2f &position) {
 }
 
 void Map::updateBombs() {
-    for (size_t i = 0; i < this->bombs.size(); i++) {
-        Bomb* bomb = this->bombs[i];
+    for (auto bomb : this->bombs) {
         if (!bomb->isExploded() && bomb->isTimeToExplode()) {
             bomb->explode();
             for (size_t j = 0; j < this->walls.size(); j++) {
                 if (this->walls[j]->canBreak() && bomb->shouldDestroy(this->walls[j]->getPosition())) {
-                    std::cout << "going to destroy:" << j << ">> " << this->walls[j]->getPosition().x << ":" << this->walls[j]->getPosition().y << std::endl;
+                    std::cout << "going to destroy:" << j <<
+                    ">> " << this->walls[j]->getPosition().x << ":" << this->walls[j]->getPosition().y << std::endl;
                     this->walls[j]->destroy();
                 }
             }
@@ -155,8 +157,8 @@ MapElement *Map::createElement(MapObject element, float xPos, float yPos) {
 void Map::init(const std::vector<std::vector<MapObject>> &mapObjects) {
     this->rows = static_cast<int>(mapObjects.size());
     this->columns = static_cast<int>(mapObjects[0].size());
+
     int x, y = 0;
-    std::vector<Enemy*> enemies;
     for (const auto &elements: mapObjects) {
         x = 0;
         for (const auto &element: elements) {
