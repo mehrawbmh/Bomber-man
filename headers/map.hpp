@@ -43,6 +43,7 @@ private:
     std::vector<Grass*> grasses;
     std::vector<Bomb*> bombs;
     std::vector<PowerUp*> powerUps;
+
     int rows;
     int columns;
 
@@ -95,6 +96,8 @@ public:
     void placePowerUpsUnderWalls();
 
     std::vector<Door*> getDoors() const;
+
+    std::vector<PowerUp*> getPowerUps() const;
 
     void update(const std::vector<Enemy*>&);
 };
