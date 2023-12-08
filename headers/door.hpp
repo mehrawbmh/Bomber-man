@@ -6,6 +6,8 @@
 class Door: public MapElement {
 private:
     bool isPlayerEntered = false;
+    const float FINAL_ROTATION_ANIMATION_ANGLE = 5.f;
+    const float FINAL_MOVEMENT_ANIMATION_MAGNITUDE = 1.f;
 
 public:
     Door(const sf::Vector2f &position, sf::Sprite _sprite);

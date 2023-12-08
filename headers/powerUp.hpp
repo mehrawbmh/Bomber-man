@@ -26,8 +26,6 @@ private:
 
     sf::Texture texture;
 
-    void initSetTexture();
-
     void initTexture(PowerUpsTypes _type);
 };
 

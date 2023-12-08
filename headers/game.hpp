@@ -59,7 +59,7 @@ private:
 
     void renderEnemies();
 
-    void playerEnemyCollision();
+    void handlePlayerEnemyCollision();
 
     void handlePlayerKeyCollision();
 

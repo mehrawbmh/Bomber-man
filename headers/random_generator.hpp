@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <ctime>
 
-
 class RandomNumberGenerator {
 private:
     int startRange;
@@ -13,7 +12,7 @@ private:
 public:
     RandomNumberGenerator(int start, int end);
 
-    int generateRandomNumber();
+    int generateRandomNumber() const;
 };
 
 #endif
