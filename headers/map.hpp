@@ -11,6 +11,7 @@
 #include "wall.hpp"
 #include "grass.hpp"
 #include "enemy.hpp"
+#include "bomb.hpp"
 
 enum MapObject {
     Wall1, Wall2, DoorTexture, GrassTexture, EnemyH, EnemyV
@@ -24,7 +25,7 @@ const std::string BASE_SPRITES_DIR = "sprites";
 class Map {
 private:
     const std::string GRASS_FILE = "grass.png";
-    const std::string BOMB_FILE = "omb.png";
+    const std::string BOMB_FILE = "bomb.png";
     const std::string WALL1_FILE = "wall-1.png";
     const std::string WALL2_FILE = "wall-2.png";
     const std::string KEY1_FILE = "key.png";
@@ -37,7 +38,8 @@ private:
     std::vector<Wall*> walls;
     std::vector<Door*> doors;
     std::vector<Key*> keys;
-    std::vector<Grass*> grasses; //todo?
+    std::vector<Grass*> grasses;
+    std::vector<Bomb*> bombs;
 
     int rows;
     int columns;
@@ -53,7 +55,7 @@ private:
     sf::Texture key3;
     std::vector<sf::Texture> keyTextures;
 
-    MapElement *createElement(MapObject element, int x, int y);
+    MapElement *createElement(MapObject element, float x, float y);
 
     sf::Texture createGrass();
 
@@ -62,6 +64,8 @@ private:
     sf::Texture createKey(int type);
 
     sf::Texture createDoor();
+
+    void updateBombs();
 
     void placeKeysUnderWalls();
 
@@ -76,6 +80,8 @@ public:
     void init(const std::vector<std::vector<MapObject>> &objects);
 
     static MapObject mapObjectFactory(char item);
+
+    Bomb* plantBomb(const sf::Vector2f &position);
 
     sf::Vector2f getMapSize() const;
 

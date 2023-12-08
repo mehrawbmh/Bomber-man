@@ -5,6 +5,7 @@
 #include <random>
 #include <stdexcept>
 #include "headers/game.hpp"
+#include "headers/breakable_wall.hpp"
 
 Game::Game() {
     this->window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), GAME_TITLE);
@@ -83,12 +84,20 @@ bool Game::isClosed() {
     return !this->window->isOpen();
 }
 
-bool Game::isFinished() {
+bool Game::isFinished() const {
     return this->finished;
 }
 
 void Game::updatePlayer() {
-    this->player->update(this->window,this->map->giveMapElements());
+    this->player->update(this->window, this->map->giveMapElements());
+    if (this->player->isThrownBomb()) {
+        std::cout << "Planting bomb...\n";
+        this->map->plantBomb(this->player->getSprite().getPosition());
+    }
+}
+
+void Game::updateMap() {
+    this->map->update();
 }
 
 void Game::update() {
@@ -96,7 +105,7 @@ void Game::update() {
     this->updatePlayer();
     this->updateEnemies();
     this->updateTimer();
-    this->map->update();
+    this->updateMap();
 }
 
 void Game::updateTimer() {
