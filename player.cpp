@@ -76,5 +76,15 @@ void Player::update(const sf::RenderTarget* target,std::vector<MapElement*> elem
 	this->updateCollision(elements);
 }
 
+void Player::reduceHp()
+{
+	this->hp -=1;
+	if (this->hp<0){
+		this->hp=0;
+	}
+}
 
-
+int Player::getHp()
+{
+	return this->hp;
+}

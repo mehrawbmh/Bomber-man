@@ -22,9 +22,9 @@ public:
     void updateBomb();
     bool isThrownBomb() const;
 
-
+    void reduceHp();
     void update(const sf::RenderTarget *target,std::vector<MapElement*> elements);
-
+    int getHp();
 };
 
 #endif
