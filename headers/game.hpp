@@ -39,7 +39,36 @@ private:
     void updateTimer();
 
     void readMap();
+
     static sf::Time readGameTime(const std::string &timeString);
+
+    void initEnemies(const std::vector<std::vector<MapObject>> &objects);
+
+    void initTimer();
+
+    void initFonts();
+
+    void initStats();
+
+    bool isFinished() const;
+
+    void updateEnemies();
+
+    void renderEnemies();
+
+    void playerEnemyCollision();
+
+    bool isPlayerDead();
+
+    bool isPlayerInvincible() const;
+
+    void updatePlayer();
+
+    void updateStats();
+
+    void updateMap();
+
+    void render();
 
 public:
     Game();
@@ -47,26 +76,10 @@ public:
     ~Game();
 
     void start();
-    void updatePlayer();
-    void updateStats();
-    void updateMap();
+
     bool isClosed();
 
     void run();
-    void render();
-
-    void initEnemies(const std::vector<std::vector<MapObject>> &objects);
-    void initTimer();
-    void initFonts();
-    void initStats();
-    bool isFinished() const;
-    void updateEnemies();
-
-    void renderEnemies();
-    void playerEnemyCollision();
-    bool isPlayerDead();
-    bool isPlayerInvincible() const;
 };
-
 
 #endif
