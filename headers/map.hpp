@@ -23,6 +23,7 @@ const int ELEMENT_SIZE_Y = 100;
 const int ELEMENT_SIZE_X = 100;
 const std::string BASE_SPRITES_DIR = "sprites";
 const int NUMBER_OF_POWER_UPS = 2;
+const int CONSOLE_OUTPUT_LENGTH = 200;
 
 class Map {
 private:

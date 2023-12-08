@@ -1,5 +1,6 @@
 #include "headers/person.hpp"
 #include "headers/breakable_wall.hpp"
+#include "headers/map.hpp"
 
 Person::Person(float x,float y,float previous_x,float previous_y)
 {
@@ -15,8 +16,8 @@ int Person::updateWindowBoundsCollision(const sf::RenderTarget * target)
 		this->sprite.setPosition(0.f, this->sprite.getGlobalBounds().top);
 		collisionHappened=1;
 	}
-	if (this->sprite.getGlobalBounds().left + this->sprite.getGlobalBounds().width >= target->getSize().x){
-		this->sprite.setPosition(target->getSize().x - this->sprite.getGlobalBounds().width, this->sprite.getGlobalBounds().top);
+	if (this->sprite.getGlobalBounds().left + this->sprite.getGlobalBounds().width >= target->getSize().x - CONSOLE_OUTPUT_LENGTH) {
+		this->sprite.setPosition(target->getSize().x - this->sprite.getGlobalBounds().width - CONSOLE_OUTPUT_LENGTH, this->sprite.getGlobalBounds().top);
 		collisionHappened=1;
 	}
 	if (this->sprite.getGlobalBounds().top <= 0.f){
