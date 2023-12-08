@@ -131,7 +131,7 @@ void Game::showEndGameText() {
 }
 
 void Game::update() {
-    if (this->isFinished() || this->isPlayerDead() || this->hasPlayerWon()) {
+    if (this->isFinished() || this->isPlayerDead()) {
         this->showEndGameText();
         return;
     }
@@ -293,6 +293,8 @@ void Game::handlePlayerDoorCollision() {
             std::cout << "Door is found and entered!!\n";
             this->player->setDoorFound(true);
             door->setPlayerEntered(true);
+            door->draw(this->window);
+            this->finished = true;
         }
     }
 }
