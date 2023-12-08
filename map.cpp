@@ -242,7 +242,7 @@ MapObject Map::mapObjectFactory(char item) {
     }
 }
 
-std::vector<MapElement*> Map::giveMapElements() const
+const std::vector<MapElement*> Map::giveMapElements() const
 {
     return mapElements;
 }
