@@ -1,4 +1,5 @@
 #include "headers/person.hpp"
+#include "headers/breakable_wall.hpp"
 
 Person::Person(float x,float y,float previous_x,float previous_y)
 {
@@ -28,10 +29,12 @@ int Person::updateWindowBoundsCollision(const sf::RenderTarget * target)
 	}
 	return collisionHappened;
 }
+
 void Person::render(sf::RenderTarget * target)
 {
 	target->draw(this->sprite);
 }
+
 const sf::Sprite Person::getSprite() const
 {
 	return this->sprite;
@@ -41,11 +44,13 @@ void Person::undoMovement()
 {
 	this->sprite.setPosition(previous_x,previous_y);
 }
+
 void Person::savePreviousLocation()
 {
 	this->previous_x=this->sprite.getGlobalBounds().left;
 	this->previous_y=this->sprite.getGlobalBounds().top;
 }
+
 int Person::updateCollision(std::vector<MapElement*> elements) {
 	int collision_happened=0;
     for(size_t i=0; i< elements.size();i++ ){
@@ -61,10 +66,14 @@ int Person::updateCollision(std::vector<MapElement*> elements) {
                 this->undoMovement();
 				collision_happened=1;
                 break;
-            case MapElementTypes::BREAKABLE_WALL:
-                this->undoMovement();
-				collision_happened=1;
+            case MapElementTypes::BREAKABLE_WALL: {
+                auto breakable = dynamic_cast<BreakableWall *>(elements[i]);
+                if (!breakable->isBrokenBefore()) {
+                    this->undoMovement();
+                    collision_happened = 1;
+                }
                 break;
+            }
             default:
                 break;
             }

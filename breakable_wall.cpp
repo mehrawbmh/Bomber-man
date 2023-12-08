@@ -6,5 +6,13 @@ BreakableWall::BreakableWall(const sf::Vector2f &position, sf::Sprite _sprite): 
 }
 
 bool BreakableWall::canBreak() {
-    return true;
+    return !this->isBroken;
+}
+
+void BreakableWall::destroy() {
+    this->isBroken = true;
+}
+
+bool BreakableWall::isBrokenBefore() {
+    return this->isBroken;
 }
