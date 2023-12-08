@@ -11,7 +11,9 @@ const std::string MAP_INIT_FILE = "map.txt";
 const std::string DEFAULT_FONT_FILE = "fonts/arial.ttf";
 const std::string SECONDARY_FONT_FILE = "fonts/calibri.ttf";
 
-const int INVINCIBLE_DURATION = 1;
+const int GAME_FPS = 100;
+const int INVINCIBLE_DURATION = 2;
+
 class Game {
 private:
     bool finished = false;

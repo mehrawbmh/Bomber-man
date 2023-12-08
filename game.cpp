@@ -22,7 +22,7 @@ Game::~Game() {
 }
 
 void Game::start() {
-    this->window->setFramerateLimit(100); //TODO: change it?
+    this->window->setFramerateLimit(GAME_FPS);
     this->window->clear(sf::Color::Black);
     this->initTimer();
     this->initStats();
@@ -219,7 +219,9 @@ void Game::playerEnemyCollision()
 {
     if(!this->isPlayerInvincible()){
         for(auto enemy:this->enemies){
-            if(this->player->getSprite().getGlobalBounds().intersects(enemy->getSprite().getGlobalBounds())){
+            sf::Sprite playerSprite = this->player->getSprite();
+            playerSprite.setScale(0.75, 0.75);
+            if( playerSprite.getGlobalBounds().intersects(enemy->getSprite().getGlobalBounds())) {
                 this->player->reduceHp();
                 this->lastHitTime=std::time(nullptr);
             }
