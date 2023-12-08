@@ -30,9 +30,8 @@ int Person::updateWindowBoundsCollision(const sf::RenderTarget * target)
 	return collisionHappened;
 }
 
-void Person::render(sf::RenderTarget * target)
-{
-	target->draw(this->sprite);
+sf::Vector2f Person::getPosition() {
+    return {this->previous_x, this->previous_y};
 }
 
 const sf::Sprite Person::getSprite() const

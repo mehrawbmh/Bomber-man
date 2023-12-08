@@ -26,7 +26,7 @@ void Player::updateBomb() {
     if (this->bombPlanted) {
         this->bombPlanted = false;
     } else {
-        this->bombPlanted = sf::Keyboard::isKeyPressed(sf::Keyboard::X) && (time(nullptr) > (this->lastPlantBombTime + 1));
+        this->bombPlanted = sf::Keyboard::isKeyPressed(sf::Keyboard::X) && (time(nullptr) > (this->lastPlantBombTime + 0.25));
         if (this->bombPlanted) {
             this->lastPlantBombTime = time(nullptr);
         }
@@ -97,4 +97,8 @@ bool Player::hasFoundTheDoor() const {
 
 void Player::setDoorFound(bool hasFound) {
     this->doorFound = hasFound;
+}
+
+void Player::render(sf::RenderTarget *target) {
+    target->draw(this->sprite);
 }

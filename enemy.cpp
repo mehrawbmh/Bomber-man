@@ -40,6 +40,7 @@ void Enemy::initInitialDirection()
         this->initialDir=InitialDirectionTypes::UP_LEFT;
     }
 }
+
 void Enemy::updatePosition()
 {
     this->savePreviousLocation();
@@ -57,5 +58,19 @@ void Enemy::updatePosition()
         }else {
             this->sprite.setTexture(this->upwards_texture);
         }
+    }
+}
+
+void Enemy::destroy() {
+    this->destroyed = true;
+}
+
+bool Enemy::isDestroyed() const {
+    return this->destroyed;
+}
+
+void Enemy::render(sf::RenderTarget *target) {
+    if (!this->isDestroyed()) {
+        target->draw(this->sprite);
     }
 }

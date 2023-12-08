@@ -63,7 +63,7 @@ sf::Texture Map::createKey(int type) {
     if (keyTexture.loadFromFile(BASE_SPRITES_DIR + "/" + file)) {
         keyTexture.getSize();
         keyTexture.setSmooth(true);
-    };
+    }
 
     return keyTexture;
 }
@@ -85,7 +85,7 @@ Bomb* Map::plantBomb(const sf::Vector2f &position) {
     return newBomb;
 }
 
-void Map::updateBombs() {
+void Map::updateBombs(const std::vector<Enemy*>& enemies) {
     for (auto bomb : this->bombs) {
         if (!bomb->isExploded() && bomb->isTimeToExplode()) {
             bomb->explode();
@@ -94,6 +94,11 @@ void Map::updateBombs() {
                     std::cout << "going to destroy:" << j <<
                     ">> " << this->walls[j]->getPosition().x << ":" << this->walls[j]->getPosition().y << std::endl;
                     this->walls[j]->destroy();
+                }
+            }
+            for (auto enemy: enemies) {
+                if (bomb->shouldDestroy(enemy->getPosition())) {
+                    enemy->destroy();
                 }
             }
         }
@@ -175,7 +180,7 @@ sf::Vector2f Map::getMapSize() const {
     return {static_cast<float>(this->rows), static_cast<float>(this->columns)};
 }
 
-void Map::update() {
+void Map::update(std::vector<Enemy*> enemies) {
     this->walls.clear();
     this->doors.clear();
     this->keys.clear();
@@ -191,7 +196,7 @@ void Map::update() {
         }
     }
 
-    this->updateBombs();
+    this->updateBombs(enemies);
     this->draw();
 }
 

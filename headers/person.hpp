@@ -28,11 +28,18 @@ public:
     Person(float x,float y,float previous_x,float previous_y);
 
     const sf::Sprite getSprite() const;
+
     void savePreviousLocation();
+
     int updateWindowBoundsCollision(const sf::RenderTarget *target);
+
     void undoMovement();
+
     int updateCollision( std::vector<MapElement*> elements);
-    void render(sf::RenderTarget *target);
+
+    virtual void render(sf::RenderTarget *target) = 0;
+
+    sf::Vector2f  getPosition();
 };
 
 #endif

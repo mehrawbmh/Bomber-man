@@ -114,7 +114,7 @@ void Game::initStats() {
 }
 
 void Game::updateMap() {
-    this->map->update();
+    this->map->update(this->enemies);
 }
 
 void Game::showEndGameText() {
@@ -242,8 +242,10 @@ void Game::playerEnemyCollision()
 {
     if(!this->isPlayerInvincible()){
         for(auto enemy:this->enemies){
+            if (enemy->isDestroyed()) continue;
             sf::Sprite playerSprite = this->player->getSprite();
             playerSprite.setScale(0.75, 0.75);
+
             if( playerSprite.getGlobalBounds().intersects(enemy->getSprite().getGlobalBounds())) {
                 this->player->reduceHp();
                 this->lastHitTime=std::time(nullptr);
