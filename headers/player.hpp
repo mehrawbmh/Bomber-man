@@ -32,6 +32,8 @@ public:
 
     void reduceHp();
 
+    void resetPosition();
+
     void increaseHp();
 
     int getHp() const;

@@ -82,6 +82,10 @@ void Player::reduceHp()
 	}
 }
 
+void Player::resetPosition() {
+    this->sprite.setPosition(0.f, 0.f);
+}
+
 int Player::getHp() const
 {
 	return this->hp;

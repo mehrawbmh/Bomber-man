@@ -249,6 +249,7 @@ void Game::handlePlayerEnemyCollision() {
 
             if( playerSprite.getGlobalBounds().intersects(enemy->getSprite().getGlobalBounds())) {
                 this->player->reduceHp();
+                this->player->resetPosition();
                 this->lastHitTime=std::time(nullptr);
             }
         }
