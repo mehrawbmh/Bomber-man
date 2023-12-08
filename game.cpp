@@ -145,6 +145,7 @@ void Game::update() {
     this->updateMap();
     this->handlePlayerKeyCollision();
     this->handlePlayerDoorCollision();
+    this->handlePlayerPowerUpCollision();
 }
 
 void Game::updateTimer() {
@@ -295,6 +296,26 @@ void Game::handlePlayerDoorCollision() {
             door->setPlayerEntered(true);
             door->draw(this->window);
             this->finished = true;
+        }
+    }
+}
+
+void Game::handlePlayerPowerUpCollision() {
+    sf::Sprite playerSprite = this->player->getSprite();
+    playerSprite.setScale(0.75, 0.75);
+    for (auto powerUp: this->map->getPowerUps()) {
+        sf::Sprite powerSprite = powerUp->getSprite();
+        powerSprite.setScale(0.5, 0.5);
+        if (!powerUp->getIsConsumed() && playerSprite.getGlobalBounds().intersects(powerSprite.getGlobalBounds())) {
+            powerUp->setIsConsumed(true);
+            if (powerUp->type == PowerUpsTypes::SPEED_BOOSTER) {
+                std::cout << "speed magnify...\n";
+                this->player->doubleMovementSpeed();
+            } else if (powerUp->type == PowerUpsTypes::SYRINGE) {
+                std::cout << "HP magnify...\n";
+                this->player->increaseHp();
+            }
+            std::cout << "Applied a power up!\n";
         }
     }
 }
