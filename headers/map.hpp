@@ -96,6 +96,8 @@ public:
 
     std::vector<Door*> getDoors() const;
 
+    std::vector<PowerUp*> getPowerUps() const;
+
     void update(const std::vector<Enemy*>&);
 };
 

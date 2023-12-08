@@ -213,14 +213,14 @@ void Map::draw() {
     for (auto &_door: this->doors) {
         _door->draw(this->window);
     }
+    for (auto &_power: this->powerUps) {
+        _power->draw(this->window);
+    }
     for (auto &_wall: this->walls) {
         _wall->draw(this->window);
     }
     for (auto &_bomb: this->bombs) {
         _bomb->draw(this->window);
-    }
-    for (auto &_power: this->powerUps) {
-        _power->draw(this->window);
     }
 }
 
@@ -269,4 +269,8 @@ void Map::placePowerUpsUnderWalls() {
 
 std::vector<Door *> Map::getDoors() const {
     return this->doors;
+}
+
+std::vector<PowerUp *> Map::getPowerUps() const {
+    return this->powerUps;
 }
