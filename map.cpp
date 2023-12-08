@@ -45,24 +45,22 @@ sf::Texture Map::createWall(int type) {
 
 sf::Texture Map::createKey(int type) {
     std::string file;
-    switch (type)
-    {
-    case 1:
-        file = this->KEY1_FILE;
-        break;
-    case 2:
-        file = this->KEY2_FILE;
-        break;
-    case 3:
-        file = this->KEY3_FILE;
-        break;
-    default:
-        break;
+    switch (type) {
+        case 1:
+            file = this->KEY1_FILE;
+            break;
+        case 2:
+            file = this->KEY2_FILE;
+            break;
+        case 3:
+            file = this->KEY3_FILE;
+            break;
+        default:
+            break;
     }
 
     sf::Texture keyTexture;
     if (keyTexture.loadFromFile(BASE_SPRITES_DIR + "/" + file)) {
-        keyTexture.getSize();
         keyTexture.setSmooth(true);
     }
 
@@ -168,7 +166,7 @@ void Map::init(const std::vector<std::vector<MapObject>> &mapObjects) {
     for (const auto &elements: mapObjects) {
         x = 0;
         for (const auto &element: elements) {
-            this->mapElements.push_back(this->createElement(element, static_cast<float>(x) , static_cast<float>(y)));
+            this->mapElements.push_back(this->createElement(element, static_cast<float>(x), static_cast<float>(y)));
             x += ELEMENT_SIZE_X;
         }
         y += ELEMENT_SIZE_Y;
@@ -182,19 +180,22 @@ sf::Vector2f Map::getMapSize() const {
     return {static_cast<float>(this->rows), static_cast<float>(this->columns)};
 }
 
-void Map::update(const std::vector<Enemy*>& enemies) {
+void Map::update(const std::vector<Enemy *> &enemies) {
     this->walls.clear();
     this->doors.clear();
     this->keys.clear();
+    this->powerUps.clear();
 
-    for(int i = 0; i < this->mapElements.size(); i++) {
-        MapElement* element = this->mapElements[i];
+    for (int i = 0; i < this->mapElements.size(); i++) {
+        MapElement *element = this->mapElements[i];
         if (dynamic_cast<Wall*>(element)) {
             this->walls.push_back(dynamic_cast<Wall*>(element));
-        } else if (dynamic_cast<Door*>(element)) {
+        } else if (dynamic_cast<Door *>(element)) {
             this->doors.push_back(dynamic_cast<Door*>(element));
-        } else if (dynamic_cast<Key*>(element)) {
+        } else if (dynamic_cast<Key *>(element)) {
             this->keys.push_back(dynamic_cast<Key*>(element));
+        } else if (dynamic_cast<PowerUp *>(element)) {
+            this->powerUps.push_back(dynamic_cast<PowerUp*>(element));
         }
     }
 
@@ -241,7 +242,7 @@ MapObject Map::mapObjectFactory(char item) {
     }
 }
 
-const std::vector<MapElement*> Map::giveMapElements() const
+std::vector<MapElement*> Map::giveMapElements() const
 {
     return mapElements;
 }
@@ -251,16 +252,16 @@ std::vector<Key*> Map::getKeys() const {
 }
 
 void Map::placePowerUpsUnderWalls() {
+    std::cout << "placing power ups...\n";
     RandomNumberGenerator generator(0, static_cast<int>(this->mapElements.size()) - 1);
     int count = 0;
 
     while (count < NUMBER_OF_POWER_UPS) {
         int rand = generator.generateRandomNumber();
-        if (dynamic_cast<BreakableWall*>(this->mapElements[rand])) {
+        if (dynamic_cast<BreakableWall *>(this->mapElements[rand])) {
             sf::Vector2f position = this->mapElements[rand]->getPosition();
-
-            this->powerUps.push_back(new PowerUp((count)?PowerUpsTypes::SPEED_BOOSTER :PowerUpsTypes::SYRINGE ,position));
-            std::cout << "placed a power up under sprite of column " << position.x / ELEMENT_SIZE_X << " : row " << position.y / ELEMENT_SIZE_Y << std::endl;
+            this->mapElements.push_back(new PowerUp((count) ? PowerUpsTypes::SPEED_BOOSTER : PowerUpsTypes::SYRINGE, position));
+            std::cout << "placed a power up under sprite of column " << position.x / ELEMENT_SIZE_X << " : row "<< position.y / ELEMENT_SIZE_Y << std::endl;
             count++;
         }
     }

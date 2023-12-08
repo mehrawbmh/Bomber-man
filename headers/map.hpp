@@ -42,6 +42,7 @@ private:
     std::vector<Grass*> grasses;
     std::vector<Bomb*> bombs;
     std::vector<PowerUp*> powerUps;
+
     int rows;
     int columns;
 
