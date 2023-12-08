@@ -33,8 +33,15 @@ bool Bomb::isTimeToExplode() const {
 }
 
 bool Bomb::shouldDestroy(sf::Vector2f objectPosition) const {
-    return (objectPosition.x >= this->destructionStartRange.x && objectPosition.x <= this->destructionEndRange.x) &&
-           (objectPosition.y >= this->destructionStartRange.y && objectPosition.y <= this->destructionEndRange.y);
+    if (objectPosition.x > destructionStartRange.x && objectPosition.x < destructionEndRange.x) {
+        return objectPosition.y >= destructionStartRange.y && objectPosition.y <= destructionEndRange.y;
+    }
+
+    if (objectPosition.x == destructionStartRange.x || objectPosition.x == destructionEndRange.x) {
+        return objectPosition.y > destructionStartRange.y && objectPosition.y < destructionEndRange.y;
+    }
+
+    return false;
 }
 
 void Bomb::draw(sf::RenderTarget *window) {
