@@ -7,6 +7,7 @@
 #include "headers/key.hpp"
 #include "headers/random_generator.hpp"
 #include "headers/bomb.hpp"
+#include "headers/powerUp.hpp"
 
 Map::Map(sf::RenderWindow *renderWindow, sf::Event _event) : window(renderWindow), event(_event) {
     this->grass = this->createGrass();
@@ -174,6 +175,7 @@ void Map::init(const std::vector<std::vector<MapObject>> &mapObjects) {
     }
 
     this->placeKeysUnderWalls();
+    this->placePowerUpsUnderWalls();
 }
 
 sf::Vector2f Map::getMapSize() const {
@@ -243,4 +245,20 @@ const std::vector<MapElement*> Map::giveMapElements() const
 
 std::vector<Key*> Map::getKeys() const {
     return this->keys;
+}
+
+void Map::placePowerUpsUnderWalls() {
+    RandomNumberGenerator generator(0, static_cast<int>(this->mapElements.size()) - 1);
+    int count = 0;
+
+    while (count < NUMBER_OF_POWER_UPS) {
+        int rand = generator.generateRandomNumber();
+        if (dynamic_cast<BreakableWall*>(this->mapElements[rand])) {
+            sf::Vector2f position = this->mapElements[rand]->getPosition();
+
+            this->powerUps.push_back(new PowerUp((count)?PowerUpsTypes::SPEED_BOOSTER :PowerUpsTypes::SYRINGE ,position));
+            std::cout << "placed a power up under sprite of column " << position.x / ELEMENT_SIZE_X << " : row " << position.y / ELEMENT_SIZE_Y << std::endl;
+            count++;
+        }
+    }
 }

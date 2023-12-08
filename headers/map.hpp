@@ -13,6 +13,7 @@
 #include "enemy.hpp"
 #include "bomb.hpp"
 #include "enemy.hpp"
+#include "powerUp.hpp"
 
 enum MapObject {
     Wall1, Wall2, DoorTexture, GrassTexture, EnemyH, EnemyV
@@ -21,7 +22,7 @@ enum MapObject {
 const int ELEMENT_SIZE_Y = 100;
 const int ELEMENT_SIZE_X = 100;
 const std::string BASE_SPRITES_DIR = "sprites";
-
+const int NUMBER_OF_POWER_UPS = 2;
 
 class Map {
 private:
@@ -40,7 +41,7 @@ private:
     std::vector<Key*> keys;
     std::vector<Grass*> grasses;
     std::vector<Bomb*> bombs;
-
+    std::vector<PowerUp*> powerUps;
     int rows;
     int columns;
 
@@ -89,6 +90,7 @@ public:
     sf::Vector2f getMapSize() const;
 
     std::vector<Key*> getKeys() const;
+    void Map::placePowerUpsUnderWalls();
 
     void update(const std::vector<Enemy*>&);
 };

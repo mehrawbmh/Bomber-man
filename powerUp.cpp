@@ -1,6 +1,6 @@
 #include "headers/powerUp.hpp"
 
-PowerUp::PowerUp(PowerUpsTypes _type): MapElement();
+PowerUp::PowerUp(PowerUpsTypes _type,sf::Vector2f position): MapElement(position)
 {
     this->type = _type;
     this->initTexture(_type);
@@ -27,4 +27,7 @@ void PowerUp::initTexture(PowerUpsTypes _type)
 void PowerUp::initSetTexture()
 {
     this->sprite.setTexture(this->texture);
+}
+void PowerUp::draw(sf::RenderTarget *target) {
+    target->draw(this->sprite);
 }
