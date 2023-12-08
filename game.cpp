@@ -143,6 +143,7 @@ void Game::update() {
     this->updateTimer();
     this->updateStats();
     this->updateMap();
+    this->handlePlayerKeyCollision();
 }
 
 void Game::updateTimer() {
@@ -262,4 +263,16 @@ bool Game::isPlayerDead()
 bool Game::isPlayerInvincible() const
 {
     return (std::time(nullptr) < this->lastHitTime + INVINCIBLE_DURATION) && (this->lastHitTime != 0);
+}
+
+void Game::handlePlayerKeyCollision() {
+    for (auto key: this->map->getKeys()) {
+        sf::Sprite playerSprite = this->player->getSprite();
+        playerSprite.setScale(0.75, 0.75);
+
+        if (!key->isTaken() && playerSprite.getGlobalBounds().intersects(key->getSprite().getGlobalBounds())) {
+            key->setIsTaken(true);
+            this->player->setFoundKeys(this->player->getFoundKeys() + 1);
+        }
+    }
 }

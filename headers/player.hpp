@@ -36,6 +36,8 @@ public:
 
     int getFoundKeys() const;
 
+    void setFoundKeys(int foundKeysCount);
+
     bool hasFoundTheDoor() const;
 
     void setDoorFound(bool hasFound);

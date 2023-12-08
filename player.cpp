@@ -91,6 +91,10 @@ int Player::getFoundKeys() const {
     return this->foundKeys;
 }
 
+void Player::setFoundKeys(int count) {
+    this->foundKeys = count;
+}
+
 bool Player::hasFoundTheDoor() const {
     return this->doorFound;
 }

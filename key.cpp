@@ -6,6 +6,16 @@ Key::Key(const sf::Vector2f &position, sf::Sprite _sprite): MapElement(position)
 }
 
 void Key::draw(sf::RenderTarget *target) {
-    this->sprite.setPosition(this->position);
-    target->draw(this->sprite);
+    if (!this->isTaken()) {
+        this->sprite.setPosition(this->position);
+        target->draw(this->sprite);
+    }
+}
+
+bool Key::isTaken() const {
+    return this->hasTakenByPlayer;
+}
+
+void Key::setIsTaken(bool isTaken) {
+    this->hasTakenByPlayer = isTaken;
 }

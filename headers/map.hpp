@@ -88,7 +88,9 @@ public:
 
     sf::Vector2f getMapSize() const;
 
-    void update(std::vector<Enemy*>);
+    std::vector<Key*> getKeys() const;
+
+    void update(const std::vector<Enemy*>&);
 };
 
 #endif

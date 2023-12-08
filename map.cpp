@@ -180,7 +180,7 @@ sf::Vector2f Map::getMapSize() const {
     return {static_cast<float>(this->rows), static_cast<float>(this->columns)};
 }
 
-void Map::update(std::vector<Enemy*> enemies) {
+void Map::update(const std::vector<Enemy*>& enemies) {
     this->walls.clear();
     this->doors.clear();
     this->keys.clear();
@@ -241,3 +241,6 @@ const std::vector<MapElement*> Map::giveMapElements() const
     return mapElements;
 }
 
+std::vector<Key*> Map::getKeys() const {
+    return this->keys;
+}
