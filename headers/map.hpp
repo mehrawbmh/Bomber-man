@@ -32,7 +32,6 @@ private:
     const std::string KEY2_FILE = "key2.png";
     const std::string KEY3_FILE = "key3.jpg";
     const std::string DOOR_FILE = "door.png";
-    const int AVAILABLE_KEYS = 3;
 
     std::vector<MapElement*> mapElements;
     std::vector<Wall*> walls;
@@ -72,11 +71,14 @@ private:
     void draw();
 
 public:
+    static const int AVAILABLE_KEYS = 3;
+
     Map(sf::RenderWindow *_window, sf::Event _event);
 
     ~Map();
 
     const std::vector<MapElement*> giveMapElements()  const;
+
     void init(const std::vector<std::vector<MapObject>> &objects);
 
     static MapObject mapObjectFactory(char item);

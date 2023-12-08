@@ -38,6 +38,10 @@ void Game::run() {
     this->render();
 }
 
+bool Game::hasPlayerWon() {
+    return this->player->getFoundKeys() == Map::AVAILABLE_KEYS  && this->player->hasFoundTheDoor();
+}
+
 void Game::initFonts() {
     this->font.loadFromFile(DEFAULT_FONT_FILE);
     this->secondaryFont.loadFromFile(SECONDARY_FONT_FILE);
@@ -95,6 +99,8 @@ void Game::updatePlayer() {
 void Game::updateStats() {
     std::stringstream ss;
     ss << "HP: " << this->player->getHp() << std::endl;
+    ss << "Found keys: " << this->player->getFoundKeys() << std::endl;
+
     this->stats.setString(ss.str());
     this->window->draw(this->stats);
 }
@@ -111,8 +117,22 @@ void Game::updateMap() {
     this->map->update();
 }
 
+void Game::showEndGameText() {
+    std::string note = this->hasPlayerWon() ? "YOU WON!\n" : "YOU LOST!\n";
+    sf::Color noteColor = this->hasPlayerWon() ? sf::Color::Green : sf::Color::Red;
+
+    this->endGameNote.setFillColor(noteColor);
+    this->endGameNote.setCharacterSize(32);
+    this->endGameNote.setPosition(static_cast<float>(this->window->getSize().x - 200), 600.f);
+    this->endGameNote.setFont(this->font);
+    this->endGameNote.setString(note);
+
+    this->window->draw(this->endGameNote);
+}
+
 void Game::update() {
-    if (this->isFinished() || this->isPlayerDead()) {
+    if (this->isFinished() || this->isPlayerDead() || this->hasPlayerWon()) {
+        this->showEndGameText();
         return;
     }
 
@@ -130,7 +150,10 @@ void Game::updateTimer() {
     std::stringstream stream;
     output = std::max(output, 0.f);
 
-    stream << "Timer\t\t" << static_cast<int>(output / 60) << " : " << static_cast<int>(static_cast<int>(output) % 60);
+    int sec = static_cast<int>(static_cast<int>(output) % 60);
+    std::string seconds = (sec < 10) ? "0" + std::to_string(sec) : std::to_string(sec);
+
+    stream << "Timer\t\t" << static_cast<int>(output / 60) << " : " << seconds;
     this->timer.setString(stream.str());
     this->window->draw(this->timer);
 

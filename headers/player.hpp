@@ -12,6 +12,8 @@ private:
     const std::string RIGHT_TEXTURE_FILE = "sprites/boy/right.png";
 
     int hp = DEFAULT_HP;
+    int foundKeys = 0;
+    bool doorFound = false;
     void initTexture();
     void updatePosition();
     void updateBomb();
@@ -31,6 +33,12 @@ public:
     void reduceHp();
 
     int getHp() const;
+
+    int getFoundKeys() const;
+
+    bool hasFoundTheDoor() const;
+
+    void setDoorFound(bool hasFound);
 };
 
 #endif

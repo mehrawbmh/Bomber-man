@@ -24,6 +24,7 @@ private:
     sf::Clock clock{};
     sf::Text timer{};
     sf::Text stats{};
+    sf::Text endGameNote{};
     sf::Font font{};
     sf::Font secondaryFont{};
     sf::Time gameTime;
@@ -33,6 +34,8 @@ private:
     std::vector<Enemy*> enemies;
 
     void handleEvents();
+
+    void showEndGameText();
 
     void update();
 
@@ -80,6 +83,8 @@ public:
     bool isClosed();
 
     void run();
+
+    bool hasPlayerWon();
 };
 
 #endif

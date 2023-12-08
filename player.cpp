@@ -86,3 +86,15 @@ int Player::getHp() const
 {
 	return this->hp;
 }
+
+int Player::getFoundKeys() const {
+    return this->foundKeys;
+}
+
+bool Player::hasFoundTheDoor() const {
+    return this->doorFound;
+}
+
+void Player::setDoorFound(bool hasFound) {
+    this->doorFound = hasFound;
+}
