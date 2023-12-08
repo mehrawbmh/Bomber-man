@@ -4,8 +4,10 @@
 
 #include "map_element.hpp"
 #include <iostream>
+
 enum PowerUpsTypes {SYRINGE = 0,SPEED_BOOSTER};
-class PowerUp:public MapElement{
+
+class PowerUp: public MapElement {
 public:
     void draw(sf::RenderTarget *window) override;
 
@@ -20,11 +22,6 @@ private:
     void initSetTexture();
     void initTexture(PowerUpsTypes _type);
 };
-
-
-
-
-
 
 
 #endif

@@ -262,3 +262,7 @@ void Map::placePowerUpsUnderWalls() {
         }
     }
 }
+
+std::vector<Door *> Map::getDoors() const {
+    return this->doors;
+}

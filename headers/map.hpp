@@ -90,7 +90,8 @@ public:
     sf::Vector2f getMapSize() const;
 
     std::vector<Key*> getKeys() const;
-    void Map::placePowerUpsUnderWalls();
+
+    void placePowerUpsUnderWalls();
 
     std::vector<Door*> getDoors() const;
 

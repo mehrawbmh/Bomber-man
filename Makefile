@@ -62,8 +62,11 @@ $(BUILD_DIR)/bomb.o: $(HEADERS_DIR)/bomb.hpp ./bomb.cpp $(BUILD_DIR)/map_element
 $(BUILD_DIR)/random_generator.o: $(HEADERS_DIR)/random_generator.hpp ./random_generator.cpp
 	$(CC) -c random_generator.cpp $(SFML_FLAGS) -o $(BUILD_DIR)/random_generator.o
 
-$(TARGET): $(BUILD_DIR) $(BIN_DIR) $(BUILD_DIR)/main.o $(BUILD_DIR)/game.o $(BUILD_DIR)/map.o $(BUILD_DIR)/player.o $(BUILD_DIR)/wall.o $(BUILD_DIR)/map_element.o $(BUILD_DIR)/breakable_wall.o $(BUILD_DIR)/non_breakable_wall.o $(BUILD_DIR)/grass.o $(BUILD_DIR)/door.o $(BUILD_DIR)/key.o $(BUILD_DIR)/random_generator.o $(BUILD_DIR)/person.o $(BUILD_DIR)/enemy.o $(BUILD_DIR)/bomb.o
-	$(CC) $(BUILD_DIR)/main.o $(BUILD_DIR)/game.o $(BUILD_DIR)/map.o $(BUILD_DIR)/player.o $(BUILD_DIR)/wall.o $(BUILD_DIR)/map_element.o $(BUILD_DIR)/breakable_wall.o $(BUILD_DIR)/non_breakable_wall.o $(BUILD_DIR)/grass.o -o $(TARGET) $(SFML_FLAGS) $(BUILD_DIR)/door.o $(BUILD_DIR)/key.o $(BUILD_DIR)/random_generator.o $(BUILD_DIR)/person.o $(BUILD_DIR)/enemy.o $(BUILD_DIR)/bomb.o;
+$(BUILD_DIR)/powerUp.o: $(HEADERS_DIR)/powerUp.hpp ./powerUp.cpp $(BUILD_DIR)/map_element.o
+	$(CC) -c powerUp.cpp $(SFML_FLAGS) -o $(BUILD_DIR)/powerUp.o
+
+$(TARGET): $(BUILD_DIR) $(BIN_DIR) $(BUILD_DIR)/main.o $(BUILD_DIR)/game.o $(BUILD_DIR)/map.o $(BUILD_DIR)/player.o $(BUILD_DIR)/wall.o $(BUILD_DIR)/map_element.o $(BUILD_DIR)/breakable_wall.o $(BUILD_DIR)/non_breakable_wall.o $(BUILD_DIR)/grass.o $(BUILD_DIR)/door.o $(BUILD_DIR)/key.o $(BUILD_DIR)/random_generator.o $(BUILD_DIR)/person.o $(BUILD_DIR)/enemy.o $(BUILD_DIR)/bomb.o $(BUILD_DIR)/powerUp.o
+	$(CC) $(BUILD_DIR)/main.o $(BUILD_DIR)/game.o $(BUILD_DIR)/map.o $(BUILD_DIR)/player.o $(BUILD_DIR)/wall.o $(BUILD_DIR)/map_element.o $(BUILD_DIR)/breakable_wall.o $(BUILD_DIR)/non_breakable_wall.o $(BUILD_DIR)/grass.o -o $(TARGET) $(SFML_FLAGS) $(BUILD_DIR)/door.o $(BUILD_DIR)/key.o $(BUILD_DIR)/random_generator.o $(BUILD_DIR)/person.o $(BUILD_DIR)/enemy.o $(BUILD_DIR)/bomb.o $(BUILD_DIR)/powerUp.o;
 
 clean:
 	rm -f *.o;
