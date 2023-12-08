@@ -90,6 +90,8 @@ public:
 
     std::vector<Key*> getKeys() const;
 
+    std::vector<Door*> getDoors() const;
+
     void update(const std::vector<Enemy*>&);
 };
 

@@ -244,3 +244,7 @@ const std::vector<MapElement*> Map::giveMapElements() const
 std::vector<Key*> Map::getKeys() const {
     return this->keys;
 }
+
+std::vector<Door*> Map::getDoors() const {
+    return this->doors;
+}

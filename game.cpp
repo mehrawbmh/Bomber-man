@@ -144,6 +144,7 @@ void Game::update() {
     this->updateStats();
     this->updateMap();
     this->handlePlayerKeyCollision();
+    this->handlePlayerDoorCollision();
 }
 
 void Game::updateTimer() {
@@ -273,6 +274,25 @@ void Game::handlePlayerKeyCollision() {
         if (!key->isTaken() && playerSprite.getGlobalBounds().intersects(key->getSprite().getGlobalBounds())) {
             key->setIsTaken(true);
             this->player->setFoundKeys(this->player->getFoundKeys() + 1);
+            std::cout << "Found a key!\n";
+        }
+    }
+}
+
+void Game::handlePlayerDoorCollision() {
+    if (player->getFoundKeys() < Map::AVAILABLE_KEYS) {
+        return;
+    }
+
+    sf::Sprite playerSprite = this->player->getSprite();
+    playerSprite.setScale(0.5, 0.5);
+    for (auto door: this->map->getDoors()) {
+        sf::Sprite doorSprite = door->getSprite();
+        doorSprite.setScale(0.5, 0.5);
+        if (doorSprite.getGlobalBounds().intersects(playerSprite.getGlobalBounds())) {
+            std::cout << "Door is found and entered!!\n";
+            this->player->setDoorFound(true);
+            door->setPlayerEntered(true);
         }
     }
 }
